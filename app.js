@@ -1,9 +1,13 @@
 const express=require('express')
 const app=express()
 
+const data=require("./data")
+
+const tare=data.osobe.filter(person=>person.class=="IV-a")
+console.log(tare)
 app.get('/',(req,res)=>{
     
-    res.send("Hello world")
+res.send(tare)
 }
 )
 
