@@ -5,34 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        table, th, td {
-          border: 1px solid black;
-        }
-        </style>
+    
 </head>
 <body>
     <p id="ada">tekst sa servera</p>
-    <form method="POST" action="/upload">
-        <input type="file" name="Upload" id="ovo">
-
+   
+   
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="upload" id="ovo">
+        <button>Dugme</button>
     </form>
     
-    <button onclick="radi()">Dugme</button>
+    
+
+    
     <script >
-function radi(){
+        function radi(){
     const element=document.getElementById("ada")
     let fake_path=document.getElementById('ovo')
     let name=fake_path.value
     name=name.split("\\").pop()
     console.log(name)
-    
+
 }
-
-
-
-
-
 
 
     </script>
