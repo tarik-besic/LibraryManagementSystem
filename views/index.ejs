@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    
+</head>
+<body>
+    
+    <%- include('./partials/nav.ejs') %>
+
+
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="upload" accept=".xls,.xlsx,.ods">
+    <a href="#"><button class="button btn-primary">SUBMIT</button></a>
+</form>
+
+<div class="container">
+
+    <!--Informaticka gimnazija.... including table partial from itUsers.ejs and passing them object arrayOfUsers so they can output data-->
+    <%- include('./partials/itUsers.ejs',{arrayOfUsers}) %>
+
+    <%- include('./partials/basicUsers.ejs',{arrayOfUsers}) %>
+    
+    <%- include('./partials/hairUsers.ejs',{arrayOfUsers}) %>
+   
+    <form method="POST"action="/removefile" enctype="text/plain">
+    <button class="btn btn-primary btn-lg">Large button</button></form>
+</div>
+    
+    </body>
+<script src="jquery.js"></script>
+
+</html>
