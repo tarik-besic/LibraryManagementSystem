@@ -16,7 +16,7 @@ mongoose.connect(dbURI, {
 }).then((result) => console.log("Database connected")).catch((err) => console.log(err)) //ovo je async task pa mogu nastavit sa .then()
 
 app.use(express.json())
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 app.set('view engine','ejs');
 
 const storage = multer.diskStorage({ //telling multer where to store the file
@@ -71,10 +71,6 @@ app.post("/removefile", (req, res) => {
     if(fs.existsSync("./public/uploadedFile.xlsx"))  //it was spamming my console that file was already deleted...that's why I put to check if file exists to delete it then
     fs.unlinkSync(path);
 
-    
-      
-    
-    
         arrayOfUsers=read()
         res.render('index',{arrayOfUsers});
     
