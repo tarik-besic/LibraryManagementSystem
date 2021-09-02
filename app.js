@@ -2,19 +2,24 @@ const express = require('express')
 const path = require("path")
 const XLSX = require("xlsx")
 const multer = require('multer')
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const User = require("./models/user")
 const fs=require('fs');
+const dotenv=require('dotenv')
+const connectDB=require('./config/database');
+const morgan=require('morgan');
 
+//load config
+dotenv.config({path:'./config/config.env' })
+
+//database connection
+connectDB();
 
 const app = express()
 
-//connect to mongoDB
-const dbURI = "mongodb+srv://tarik-besic:{password}@cluster0.pk5um.mongodb.net/user-data?retryWrites=true&w=majority"
-mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then((result) => console.log("Database connected")).catch((err) => console.log(err)) //ovo je async task pa mogu nastavit sa .then()
+//app.use(morgan('dev'))
+const PORT=process.env.PORT || 5000
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
@@ -50,10 +55,37 @@ app.get('/', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    
-    arrayOfUsers=read();
-    res.render('users',{arrayOfUsers});
+    console.log("OVDJE");
+    res.render('users');
+
 })
+app.get('/getusers/query', async(req, res) => {
+   let name=req.query.name;
+   let book=req.query.book;
+   let schoolClass=req.query.class;
+
+   // console.log(name+book+schoolClass)
+   if(typeof name !='undefined')
+    name=name.toLowerCase();
+    
+    if(!schoolClass) 
+    schoolClass="/";
+    if(!name) name=9   //setting it to something weird so it wont be found in OR STATMENT IN DATABASE 
+  
+    if(!book)book=9
+ 
+    try {
+        result=await User.find({$or:[{name:{$regex:name}},{class:{$regex:schoolClass}},{book:{$regex:book}}]})
+    } catch (err) {
+        console.log(err)
+    }    
+    finally{
+        if(!result) console.log("NEEE")
+        console.log(result)
+    }
+    
+})
+
 
 
 app.post("/upload", upload.single("upload"), (req, res) => {
@@ -64,14 +96,12 @@ app.post("/upload", upload.single("upload"), (req, res) => {
 })
 app.post("/removefile", (req, res) => {
     
-    const path = './public/uploadedFile.xlsx'
-    
+    const path = './public/uploadedFile.xlsx'   
 
     if(fs.existsSync("./public/uploadedFile.xlsx"))  //gotta check if the file exists first...or server error occures 
     fs.unlinkSync(path);         //deleteing file       
         res.render('index');
     
-
 })
 app.get("/class",(req,res)=>{
     arrayOfUsers=read()
@@ -106,7 +136,9 @@ app.post("/uploadusers",async (req, res) => {
          if(typeof lastname!=='undefined')
          {  
          
-         lastname=lastname.trim();}
+         lastname=lastname.trim();
+        
+        }
          else {
         lastname="NOLASTNAME"
         adddata=false;
@@ -118,7 +150,7 @@ app.post("/uploadusers",async (req, res) => {
 
         }
         else
-        {email=false;} //if client forgot email is false
+        {email=false;} //if client forgot email then variable email is false
         
         
         //if the user didn't input first and last name and if he messed up email then its error
@@ -129,6 +161,8 @@ app.post("/uploadusers",async (req, res) => {
        
          else 
          {
+             firstname=firstname.toLowerCase();
+             lastname=lastname.toLowerCase();
          user.name=firstname+ ' '+ lastname;
 
         
@@ -137,6 +171,8 @@ app.post("/uploadusers",async (req, res) => {
     });
     //spliting each user into specific array and then insterting them into database
     //also adding them class
+
+    //SHOULD UPDATE CLASSES FRIST HERE
     let user={};
     
     switch (counter) {
@@ -195,8 +231,8 @@ else if(adddata==false)
 res.status(401).render("index");
 
 })
-app.listen(5000, () => {
-    console.log("Server is listening on port 5000...")
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}...`)
 })
 
 
@@ -234,7 +270,7 @@ function read()
             switch (classwork) {
                 case 0:itUsers.push(user); break;
 
-                case 1:basicUsers.push(user);   break;
+                case 1:basicUsers.push(user); break;
                 
                 case 2:hairUsers.push(user); break;
             }
