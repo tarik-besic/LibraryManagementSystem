@@ -103,15 +103,15 @@
       //--->get row data > end
   
       //use the "arr"	object for your ajax call
-      $.extend(arr, {row_id:row_id});
+      // $.extend(arr, {row_id:row_id});
   
-      $.ajax({
-        type:"post",
-        url:"http://localhost:8080/upload",
-        contentType:"application/json",
-        data:JSON.stringify(arr),
-        success:function(data,status){alert(status)}
-      });
+      // $.ajax({
+      //   type:"post",
+      //   url:"http://localhost:8080/upload",
+      //   contentType:"application/json",
+      //   data:JSON.stringify(arr),
+      //   success:function(data,status){alert(status)}
+      // });
   
       //this could be a cool feature
   //		$('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
