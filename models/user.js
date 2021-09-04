@@ -8,13 +8,21 @@ const userSchema=new Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     class:{
         type:String,
         required:true
-    }
-})
+    },
+    books:[
+        {
+         type:String
+        }
+    ],
+}
+
+)
 
 const User=mongoose.model('User',userSchema) //(pluralising it first)telling which collection to search in mongodb... in the end it will be users
 
