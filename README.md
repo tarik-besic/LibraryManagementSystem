@@ -1,7 +1,9 @@
 # LibraryManagementSystem
 
+Fullstack web app
 
-Main purpose of this project is to handle the primary functions of a High School Library
+This project is a Library Management System which could be used in a High School.
+It is not finished, I need to make 4-5 additional functionalities on frontend and few more api routes on backend.
 
 ## Technologies used:
 -NodeJs/Express for backend
