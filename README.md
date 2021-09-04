@@ -2,10 +2,11 @@
 
 Fullstack web app
 
-This project is a Library Management System which could be used in a High School.
+The Library Management Sytem is a library management web application which can be used by High Schools 
+Some of the features are: managing books, users, adding new classes of students and updating existing ones
+in database, managing issued and returned books, keeping a record of entire school year history stats...
 
-Halfway done with the project..
-I need to make 4-5 additional functionalities on frontend and few more api routes on backend.
+Ongoing project..
 
 ## Technologies used:
 -NodeJs/Express for backend
