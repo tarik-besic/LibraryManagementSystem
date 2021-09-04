@@ -20,4 +20,8 @@ Ongoing project..
 -Bootstrap for styling
 
 -Postman for api testing
-![image](https://user-images.githubusercontent.com/57440622/132095972-8b275708-c01f-4665-825c-0ce31ee4dfa4.png)
+
+Few snippets of project..
+![image](https://user-images.githubusercontent.com/57440622/132106812-b7b2b373-48ba-40c8-8de9-d3847a7f28f9.png)
+![image](https://user-images.githubusercontent.com/57440622/132106822-dcc55a9d-a2dc-477f-8bd5-f795543d3bdc.png)
+
