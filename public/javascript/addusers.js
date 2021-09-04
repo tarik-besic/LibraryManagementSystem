@@ -66,7 +66,7 @@
        
         $.ajax({
             type:"post",
-            url:"http://localhost:5000/uploadusers",
+            url:"http://localhost:5000/class/users",
             contentType:"application/json",
             data:JSON.stringify(output),
             success:function(status){alert("NAPRAVILI STE RAZRED");},
