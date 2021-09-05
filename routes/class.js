@@ -43,7 +43,7 @@ router.post("/upload", upload.single("upload"), (req, res) => {
 })
 
 router.post("/users",async (req, res) => {
-     
+    let allUsers=[]; 
     let arr=req.body;
     let itUsers=[],hairUsers=[],basicUsers=[];
     let adddata=true;
@@ -76,14 +76,21 @@ router.post("/users",async (req, res) => {
         lastname="NOLASTNAME"
         adddata=false;
         }
-                 
+
+      
+
+
+
+        
+
         if(user.email.includes("@"))
         {
             email=true;
 
         }
         else
-        {email=false;} //if client forgot email then variable email is false
+        {//email=false;
+        res.status(401)} //if client forgot email then variable email is false
         
         
         //if the user didn't input first and last name and if he messed up email then its error
@@ -103,51 +110,85 @@ router.post("/users",async (req, res) => {
     //also adding them class
 
     //SHOULD UPDATE CLASSES FRIST HERE
-    let user={};
+    
+    
     
     switch (counter) {
         case 1:
-            element.forEach(x => { //saving each user into database
+            element.forEach(x => {
+                try {
                     user_database=new User({
-                    name:x.name,
-                    email:x.email,
-                    class:"1-a",
-                    books:[]
-                })
-               user_database.save().then(()=>console.log("IT UserSaved"));
+                        name:x.name,
+                        email:x.email,
+                        class:"1-a",
+                        books:[]
+                    })
+                }
+                 catch (error) {
+                    console.log("NE moze isti mail")
+                }
+                   
+               // user_database.save().then(()=>console.log("Hair UserSaved"));
+                allUsers.push(user_database);
             });
             break;  
         case 2:
             element.forEach(x => {
+                try {
                     user_database=new User({
-                    name:x.name,
-                    email:x.email,
-                    class:"1-b",
-                    books:[]
-                })
-                user_database.save().then(()=>console.log("Basic UserSaved"));
+                        name:x.name,
+                        email:x.email,
+                        class:"1-b",
+                        books:[]
+                    })
+                }
+                 catch (error) {
+                    console.log("NE MOZE ISTI EMAIL")
+                }
+                   
+               // user_database.save().then(()=>console.log("Hair UserSaved"));
+                allUsers.push(user_database);
             });
             break;
         case 3:
             element.forEach(x => {
+                try {
                     user_database=new User({
-                    name:x.name,
-                    email:x.email,
-                    class:"1-c",
-                    books:[]
-                })
-                user_database.save().then(()=>console.log("Hair UserSaved"));
+                        name:x.name,
+                        email:x.email,
+                        class:"1-c",
+                        books:[]
+                    })
+                }
+                 catch (error) {
+                    console.log(error)
+                }
+                   
+               // user_database.save().then(()=>console.log("Hair UserSaved"));
+                allUsers.push(user_database);
             });
             break;
     }
-        //first gotta update all classes
+        
+    //first gotta update all classes
         
         //user_database.findById({name{}})
-        
-      
-        
-      
+            
    });
+   console.log(allUsers)
+   if(adddata)
+{try {
+    User.insertMany(allUsers) 
+} catch (error) {
+    console.log(error)
+}finally{
+    res.status(200).render("index")
+}}
+else if(adddata==false)
+res.status(401).render("index");
+
+}
+)
   
 
 
@@ -157,12 +198,7 @@ router.post("/users",async (req, res) => {
 //let tare=await User.find({name:"Tarik Besic"},{$set: {class:'2-a'},function(err,model){if(err)console.log("ERROR"); else console.log(model)}});   
 
 
-if(adddata)
-res.status(200).render("index")
-else if(adddata==false)
-res.status(401).render("index");
 
-})
 
 
 
