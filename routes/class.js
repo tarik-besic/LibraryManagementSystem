@@ -1,4 +1,3 @@
-const { Router } = require('express')
 const express=require('express')
 const router=express.Router()
 const multer = require('multer')
@@ -27,7 +26,33 @@ const storage = multer.diskStorage({ //telling multer where to store the Excel f
 const upload = multer({
     storage
 });
+async function checkEmail(){
+    let allUsers=[],rejectedUsers=[]; 
+    try {
+    
+    for (let i = 0; i < arr.length; i++) { 
+               
+      for (let j = 0; j < arr[i].length; j++) {
+       const user = arr[i][j];
+       
+         let data=await User.findOne({email:user.email})
+         if(data){
+             rejectedUsers.push(user);
+            //  console.log("Naso sam korisnika:"+data+"... sad dodajem korisnika ovog:"+user.email) 
+            }
+         else allUsers.push(user);  
+    }
 
+}}
+    catch (error) {
+        console.log(error);
+    }
+//     console.log("Na kraju funkcije finnally...");
+//    console.log("Odbijeni korisnici su:"+rejectedUsers[0].name);
+//    console.log("Prihvaceni korisnici su:"+allUsers[0].name);
+
+return [rejectedUsers,allUsers];
+}
 
 router.get("/",(req,res)=>{
     arrayOfUsers=read()
@@ -43,17 +68,18 @@ router.post("/upload", upload.single("upload"), (req, res) => {
 })
 
 router.post("/users",async (req, res) => {
-    let allUsers=[]; 
     let arr=req.body;
     let itUsers=[],hairUsers=[],basicUsers=[];
     let adddata=true;
-    let counter=0; //defining counter
+    let emailResult;
+    let rejectedUsers=[],allUsers=[];
+
   // array of arrays, thats why I'm using double forEach
-   arr.forEach(element => {
-    counter++;
-    element.forEach(user => {
-       
-        user.name=user.name.trim();
+   
+  for (let i = 0; i < arr.length; i++) {
+      for (let k = 0; k < arr[i].length; k++) {
+          const user = arr[i][k];
+          user.name=user.name.trim();
          let email=false       //bool variable to check if email is correct
         
         
@@ -67,32 +93,20 @@ router.post("/users",async (req, res) => {
          firstname=firstname.trim();
 
          if(typeof lastname!=='undefined')
-         {  
-         
-         lastname=lastname.trim();
-        
+         {         
+         lastname=lastname.trim();        
         }
          else {
         lastname="NOLASTNAME"
         adddata=false;
         }
-
-      
-
-
-
-        
-
         if(user.email.includes("@"))
         {
             email=true;
-
         }
         else
-        {//email=false;
-        res.status(401)} //if client forgot email then variable email is false
-        
-        
+        {email=false;
+        res.status(401)} //if client forgot email then variable email is false        
         //if the user didn't input first and last name and if he messed up email then its error
         if(firstname==="undefined"||lastname==="undefined"|| email==false)
         {
@@ -104,102 +118,51 @@ router.post("/users",async (req, res) => {
              lastname=lastname.toLowerCase();
             user.name=firstname+ ' '+ lastname;
         }
-        
-    });
-    //spliting each user into specific array and then insterting them into database
-    //also adding them class
 
-    //SHOULD UPDATE CLASSES FRIST HERE
-    
-    
-    
-    switch (counter) {
-        case 1:
-            element.forEach(x => {
-                try {
-                    user_database=new User({
-                        name:x.name,
-                        email:x.email,
-                        class:"1-a",
-                        books:[]
-                    })
-                }
-                 catch (error) {
-                    console.log("NE moze isti mail")
-                }
-                   
-               // user_database.save().then(()=>console.log("Hair UserSaved"));
-                allUsers.push(user_database);
-            });
-            break;  
-        case 2:
-            element.forEach(x => {
-                try {
-                    user_database=new User({
-                        name:x.name,
-                        email:x.email,
-                        class:"1-b",
-                        books:[]
-                    })
-                }
-                 catch (error) {
-                    console.log("NE MOZE ISTI EMAIL")
-                }
-                   
-               // user_database.save().then(()=>console.log("Hair UserSaved"));
-                allUsers.push(user_database);
-            });
-            break;
-        case 3:
-            element.forEach(x => {
-                try {
-                    user_database=new User({
-                        name:x.name,
-                        email:x.email,
-                        class:"1-c",
-                        books:[]
-                    })
-                }
-                 catch (error) {
-                    console.log(error)
-                }
-                   
-               // user_database.save().then(()=>console.log("Hair UserSaved"));
-                allUsers.push(user_database);
-            });
-            break;
-    }
-        
-    //first gotta update all classes
-        
-        //user_database.findById({name{}})
-            
-   });
-   console.log(allUsers)
-   if(adddata)
-{try {
-    User.insertMany(allUsers) 
-} catch (error) {
-    console.log(error)
-}finally{
-    res.status(200).render("index")
-}}
-else if(adddata==false)
-res.status(401).render("index");
-
-}
-)
-  
-
-
-//TESTIRAM KAKO DA UPDATEAM SVE RAZREDE NAKON STO NAPRAVIS NOVI RAZRED (MORAT CU I IZBRISAT SVE cetvrte razrede sa obzirom da se ovo radi na kraju godine.)
+        switch (i) {
+            case 0:
+                user.class="1-a";
+              break;
+            case 1:
+                user.class="1-b";
+                break;
+            case 2:
+                user.class="1-c";
+                break;
+      }
+      //should update classes first 
+      //first checking email if it exists
+      //TESTIRAM KAKO DA UPDATEAM SVE RAZREDE NAKON STO NAPRAVIS NOVI RAZRED (MORAT CU I IZBRISAT SVE cetvrte razrede sa obzirom da se ovo radi na kraju godine.)
 //ali imaj na umu da prvo sacuvas koliko je knjiga rentano za history stats class
 
-//let tare=await User.find({name:"Tarik Besic"},{$set: {class:'2-a'},function(err,model){if(err)console.log("ERROR"); else console.log(model)}});   
+      let data=await User.findOne({email:user.email})
+      if(data){
+          rejectedUsers.push(user); //adding user which has its email already in database rejectedUsers
+         }
+      else allUsers.push(user);  //else user is not found in database and just adding him to allUsers..
+    }}
 
 
+if(adddata)
+{try {
+    if(rejectedUsers.length==0)
+    {
+        await User.insertMany(allUsers)
+        res.status(200)
+    }
+    else{
+    console.log("ODBIJENI KORISNICI KOJI VEC POSTOJE U BAZI PODATAKA SU:")
+    console.log(rejectedUsers);
+    res.status(400).json(rejectedUsers);
+}
+
+} catch (error) {
+    console.log(error)
+}}
+else if(!adddata)
+res.status(401)
 
 
-
-
+  
+})
 module.exports=router
