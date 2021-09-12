@@ -4,26 +4,20 @@
     <%- include('./partials/head.ejs') %>
     <link rel="stylesheet" href="/css/stylesSearch.css">
     <link rel="stylesheet" href="/css/styles.css">
-   
-   
-
-    
 </head>
 <body id="body-pd"class="body-pd">
     
     <%- include('./partials/nav.ejs') %>
-    
-    <form action="users/getusers/" method="get">
+
+<form action="users/getusers/" method="get">
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-10">
                 <div class="card p-3 py-4">
                     <h5>Search for users</h5>
-                    <div class="row g-3 mt-2">
-                       
+                    <div class="row g-3 mt-2">         
                         <div class="col-md-6"> <input type="text" class="form-control" placeholder="Enter users name" id="search_users_input_name"name="name"> </div>
                         <div class="col-md-3"> <button class="btn btn-secondary btn-block" id="search_users_btn">Search Results</button> </div>
-                    
                     </div>
                     <div class="mt-3"> <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="advanced"> Advance Search With Filters <i class="fa fa-angle-down"></i> </a>
                         <div class="collapse" id="collapseExample">
@@ -36,7 +30,6 @@
                             </div>
                         </div>
                     </div>
-                
                 </div>
             </div>
         </div>

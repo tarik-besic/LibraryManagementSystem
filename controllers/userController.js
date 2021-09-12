@@ -27,7 +27,7 @@ const user_create_one=async(req,res)=>{
         res.status(400).send(error);
     }
     finally{
-        res.status(200).send(result)
+        res.status(200).json(result);
     }
     
 };
