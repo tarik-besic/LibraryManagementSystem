@@ -1,12 +1,17 @@
 # LibraryManagementSystem
 
+Fullstack web app
 
-Main purpose of this project is to handle the primary functions of a High School Library
+The Library Management Sytem is a library management web application which can be used by High Schools 
+Some of the features are: managing books, users, adding new classes of students and updating existing ones
+in database, managing issued and returned books, keeping a record of entire school year history stats...
+
+Ongoing project..
 
 ## Technologies used:
 -NodeJs/Express for backend
 
--Jquery for api calls
+-Jquery for api calls - front end
 
 -MongoDB for Database
 
@@ -15,3 +20,8 @@ Main purpose of this project is to handle the primary functions of a High School
 -Bootstrap for styling
 
 -Postman for api testing
+
+Few snippets of project..
+![image](https://user-images.githubusercontent.com/57440622/132106812-b7b2b373-48ba-40c8-8de9-d3847a7f28f9.png)
+![image](https://user-images.githubusercontent.com/57440622/132106822-dcc55a9d-a2dc-477f-8bd5-f795543d3bdc.png)
+

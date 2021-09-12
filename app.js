@@ -1,11 +1,10 @@
 const express = require('express')
-const fs=require('fs');
 const dotenv=require('dotenv')
 const connectDB=require('./config/database');
-
 const {userRouter}=require('./routes/user');
 const classRouter=require('./routes/class');
-
+const rmFileRouter=require('./routes/rmFile')
+const Book=require('./models/book')
 
 //load config
 dotenv.config({path:'./config/config.env' })
@@ -21,26 +20,52 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(express.static(__dirname + '/public'))
+
+//setting view engine
 app.set('view engine','ejs');
 
 // using express router
+
 app.use('/users',userRouter);
 app.use('/class',classRouter);
-
+app.use('/removefile',rmFileRouter);
 
 app.get('/', (req, res) => {
     
     res.render('index');
 })
+app.get('/books', async(req, res) => {
+    let arrayOfBooks=await Book.find({});
+    console.log(arrayOfBooks)
+    res.render('books',{arrayOfBooks});
+})
+app.post('/books',(req,res)=>{
 
-app.post("/removefile", (req, res) => {
-    
-    const path = './public/uploadedFile.xlsx'   
+    let name=req.body.name;
+    let author=req.body.author;
+    let quantityAll=req.body.quantityAll;
+    let quantityFree=req.body.quantityFree;
+    let isbn=req.body.isbn;
 
-    if(fs.existsSync("./public/uploadedFile.xlsx"))  //gotta check if the file exists first...or server error occures 
-    fs.unlinkSync(path);         //deleteing file       
-        res.render('index');
-    
+    console.log(quantityFree)
+     let book=new Book({
+         name:name,
+         author:author,
+         quantityAll:quantityAll,
+         quantityFree:quantityFree,
+         isbn:isbn
+         })
+         book.save().then((data)=>{
+         //   res.status(200).send(data)
+
+         })
+
+// let user_database=new User({
+//         name:name,
+//         email:email,
+//         class:schoolclass,
+//         books:books
+//     })
 })
 
 

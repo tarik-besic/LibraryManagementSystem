@@ -66,9 +66,6 @@
       });  
     });
     
-  
-    
-    
     $(document).on('click', '.btn_save', function(event) 
     {
       event.preventDefault();
@@ -83,9 +80,7 @@
   
       //show edit button
       tbl_row.find('.btn_edit').show();
-  
-  
-  
+ 
       tbl_row.find('.row_data')
       .attr('edit_type', 'click')
       .removeClass('bg-light')
@@ -129,3 +124,4 @@
       });
     
   })
+  // $('#myTable tr:last').after('<tr>...</tr><tr>...</tr>');
