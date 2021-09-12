@@ -1,0 +1,28 @@
+#addIsbn{
+    border-radius: 25px;
+    min-width: 60px;
+}
+#addBookQntyFree{
+    border-radius: 25px;
+    min-width: 20px;
+}
+#addBookQntyAll{
+    border-radius: 25px;
+    min-width: 20px;
+}
+#addWriter{
+    border-radius: 25px;
+    min-width: 60px;
+}
+#addBook{
+    border-radius: 25px;
+    min-width: 60px;
+}
+.cont, .row_data
+{
+display:block;
+}
+
+.bookqnty{
+    max-width:90px;
+}
