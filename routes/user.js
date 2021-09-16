@@ -3,10 +3,8 @@ const userRouter=express.Router()
 const fs=require('fs')
 const XLSX = require("xlsx")
 const path=require('path')
-const morgan=require('morgan');
-//userRouter.use(morgan('dev'))
+
 const userController=require('../controllers/userController')
-const User=require('../models/user')
 
 userRouter.get('/', (req, res) => {
     

@@ -25,8 +25,6 @@
           .addClass('bg-light')
           .css('padding','3px')
     
-    
-    
         tbl_row.find('.row_data').each(function(index, val) 
         {  
           //this will help in case user decided to click on cancel button
@@ -36,9 +34,7 @@
     
       });
     
-  
-  
-  
+
     $(document).on('click', '.btn_cancel', function(event) 
     {
       event.preventDefault();
@@ -95,22 +91,9 @@
         var col_val  =  $(this).html();
         arr[col_name] = col_val;
       });
-      //--->get row data > end
-  
-      //use the "arr"	object for your ajax call
-      // $.extend(arr, {row_id:row_id});
-  
-      // $.ajax({
-      //   type:"post",
-      //   url:"http://localhost:8080/upload",
-      //   contentType:"application/json",
-      //   data:JSON.stringify(arr),
-      //   success:function(data,status){alert(status)}
-      // });
-  
-      //this could be a cool feature
-  //		$('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
-       
+     
+      tbl_row.css("background-color","#FFFFFF");
+
   
     });
   
@@ -124,4 +107,4 @@
       });
     
   })
-  // $('#myTable tr:last').after('<tr>...</tr><tr>...</tr>');
+  

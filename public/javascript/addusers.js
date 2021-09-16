@@ -70,7 +70,44 @@
             contentType:"application/json",
             data:JSON.stringify(output),
             success:function(status){alert("NAPRAVILI STE RAZRED");},
-            error:function(e){alert("PROVJERITE SVA IMENA I EMAIL ADRESE IMATE GRESKU")}
+            error:function(status){
+                //console.log(status.responseJSON.arrayUsers);
+                
+                $('#tableID0 tr').each(function(){
+                    name = $(this).find("#userName").text();
+                    email = $(this).find("#userEmail").text();
+
+                    status.responseJSON.arrayUsers.forEach(user => {
+                        if(name==user.name&&email==user.email)
+                        {
+                        $(this).css("background-color","#FF0000");
+                    }
+                    });
+                });
+                $('#tableID1 tr').each(function(){
+                    name = $(this).find("#userName").text();
+                    email = $(this).find("#userEmail").text();
+
+                    status.responseJSON.arrayUsers.forEach(user => {
+                        if(name==user.name&&email==user.email)
+                        {
+                        $(this).css("background-color","#FF0000");
+                    }
+                    });
+                });
+                $('#tableID2 tr').each(function(){
+                    name = $(this).find("#userName").text();
+                    email = $(this).find("#userEmail").text();
+
+                    status.responseJSON.arrayUsers.forEach(user => {
+                        if(name==user.name&&email==user.email)
+                        {
+                        $(this).css("background-color","#FF0000");
+                    }
+                    });
+                });
+                // alert("PROVJERITE SVA IMENA I EMAIL ADRESE IMATE GRESKU")
+        }
           });
 
 

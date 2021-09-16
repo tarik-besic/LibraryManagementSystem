@@ -25,9 +25,7 @@ const BookSchema=new Schema({
          required:true  
         }
 }
-
 )
-
 const Book=mongoose.model('book',BookSchema) //(pluralising it first)telling which collection to search in mongodb... in the end it will be users
 
 module.exports=Book;
