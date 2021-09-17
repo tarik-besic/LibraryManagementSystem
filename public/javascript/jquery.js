@@ -91,8 +91,8 @@
         var col_val  =  $(this).html();
         arr[col_name] = col_val;
       });
-     
-      tbl_row.css("background-color","#FFFFFF");
+      
+      tbl_row.css("background-color","#FFFFFF"); //setting color to white  
 
   
     });
