@@ -34,7 +34,46 @@ const postCategory=async(req,res)=>{
 
 }
 
+const updateCategory=async(req,res)=>{
+    let name=req.body.name;  
+    let update=req.body.update;  
+    let result;
+    try {
+        result=await Category.findOneAndUpdate({name:name},{name:update},{new:true}); //adding update and new true so I get object after updating it
+    } catch (error) {
+        console.log(error);
+    }
+
+    if(result)
+    {
+        res.status(200).json(result)
+    }
+    else 
+    res.status(401).json({msg:"Cannot find the category"});
+
+}
+
+const deleteCategory=async(req,res)=>{
+    let name=req.body.name;  
+    let result;
+    try {
+        result=await Category.findOneAndDelete({name:name});
+    } catch (error) {
+        console.log(error);
+    }
+
+    if(result)
+    {
+        res.status(200).json(result)
+    }
+    else 
+    res.status(401).json({msg:"Cannot find the category"});
+
+}
+
 module.exports={
     getCategories,
-    postCategory
+    postCategory,
+    updateCategory,
+    deleteCategory
 }

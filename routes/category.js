@@ -7,7 +7,7 @@ const categoryController=require('../controllers/categoryController');
 
 categoryRouter.get('/',categoryController.getCategories);
 categoryRouter.post('/',categoryController.postCategory);
-// categoryRouter.patch('/',categoryController.updateCategory);
-// categoryRouter.delete('/',categoryController.deleteCategory);
+categoryRouter.patch('/',categoryController.updateCategory);
+categoryRouter.delete('/',categoryController.deleteCategory);
 
 module.exports=categoryRouter;
