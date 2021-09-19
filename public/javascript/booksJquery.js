@@ -135,14 +135,21 @@
             book:"",
             author:"",
             quantityAll:"",
-            quantityFree:"",
+            category:"",
             isbn:""
           };
           let addBook=true; //variable for checking if I should send book to server..
           tbl_row.find('.row_data').each(function() 
-          {    
-            let id=$(this).attr('id')  //getting id of each row so use it switch statement...
-            let value  =  $(this).html();
+          { let value;
+            let id=$(this).attr('id');  //getting id of each row so use it switch statement...
+            console.log(id);
+            if(id=="category") //because its drop down select I have to find it first and then get selected category
+            {
+              value = $('#bookcategory').find(":selected").text(); //getting selected value
+            }
+            else
+            value  =  $(this).html();
+
             if(value=="")   //checking if any of the values is empty..if it Is I won't send data to server but I will send alert to user 
             {
               addBook=false;
@@ -154,17 +161,17 @@
                 case 'book':arr.book=value; break;
                 case 'author':arr.author=value; break;
                 case 'quantityAll':arr.quantityAll=value; break;
-                case 'quantityFree':arr.quantityFree=value; break;
+                case 'category':arr.category=value; break;
                 case 'isbn':arr.isbn=value; break;
               }
              
           });
-
+          console.log(arr);
           if(addBook) //sending book to server to add it to Database only if all values are entered
           {
             $.ajax({
               type:"post",
-              url:"http://localhost:5000/books",
+              url:"http://localhost:5000/booksqq",
               contentType:"application/json",
               data:JSON.stringify(arr),
               success:function(data){
@@ -175,7 +182,7 @@
                 <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.name}</div></td>
                 <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.author}</div></td>
                 <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.quantityAll}</div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.quantityFree}</div></td>
+                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.category}</div></td>
                 <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.isbn}</div></td>
                 <td>
                 <span class="btn_edit" ><button class="btn btn-primary btn-sm"><svg class="edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -196,26 +203,18 @@
                 $("#book").text("");
                 $("#author").text("");
                 $("#quantityAll").text("");
-                $("#quantityFree").text("");
+                $("#category").text("");
                 $("#isbn").text("");
               },
               error:function(e){alert("PROVJERITE SVA IMENA I EMAIL ADRESE IMATE GRESKU");}
             });
   
-
           }
           else {
             alert("Niste popunili sva polja prilikom kreiranja knjige");
-
           }
 
-          $(".tdEdit").each(function(index)
-          {
-            // let id=$(this).attr('id')  //getting id of each row so use it switch statement...
-            // let value  =  $(this).html();
-           
-           //izaberi svaki element i stavi mu vrijednost na ""
-          });
+         
           
     //       var arr = {}; 
     //       tbl_row.find('.row_data').each(function(index, val) 
