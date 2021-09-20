@@ -7,6 +7,7 @@
               <td >Naziv knjige</td>
               <td >Naziv pisca</td>
               <td >Ukupna kolicina knjige</td>
+              <td >Slobodna kolicina knjige</td>
               <td >Kategorija knjige</td>
               <td >Isbn</td>
               <td >Akcija</td>
@@ -14,17 +15,17 @@
           </thead>
           <tbody>   
               <tr row_id=-1>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="book" contenteditable="true"></div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="author"contenteditable="true"></div></div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="quantityAll"contenteditable="true"> </div></div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="category"></div>
-                    <select id="bookcategory" name="cars">
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="fiat">Fiat</option>
-                      <option value="audi">Audi</option>
+                <td ><div class="cont"><div class="row_data text-dark"id="book" contenteditable="true"></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="author"contenteditable="true"></div></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="quantityAll"contenteditable="true"> </div></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="quantityFree"contenteditable="true"> </div></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="category"></div>
+                    <select id="selectCategory" name="cars">
+                      <% booksCategories.forEach(element=>{ %>
+                      <option ><%= element.name %></option>
+                    <% }) %>
+                      
                     </select>
-                
                 </div></td>
                 <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="isbn"contenteditable="true"></div></div></td>
                 <td>
@@ -38,10 +39,11 @@
                   <% counter++%>
                 <tr row_id=<%=counter %>>
                 <td ><div class="row_data"id="bookName"><%= book.name %> </div></td>
-                <td ><div class="row_data"id="writerName"><%= book.author %></div></td>
+                <td ><div class="row_data"id="authorName"><%= book.author %></div></td>
+                <td ><div class="row_data"id="bookCategory"><%= book.quantityAll %> </div></td>
                 <td ><div class="row_data"id="bookQntyAll"><%= book.quantityFree %> </div></td>
                 <td ><div class="row_data"id="bookQntyFree"><%= book.quantityAll %> </div></td>
-                <td ><div class="row_data"id="bookisbn"><%= book.isbn %></div></td>
+                <td ><div class="row_data"id="bookIsbn"><%= book.isbn %></div></td>
                 <td>
                 <span class="btn_edit"><button class="btn btn-primary btn-sm" row_id=<%=counter %>><svg class="edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>

@@ -4,7 +4,13 @@
         $(document).find('.btn_cancel').hide();
         $(document).find('.btn_saveBook').show();
     
-
+        $("#quantityAll").keyup(function(){
+          
+          let text=$("#quantityAll").text();
+          console.log("ide");
+          console.log(text);
+          $("#quantityFree").text(text);
+        });
           $(document).on('click', '.btn_edit', function(event) 
         {
             event.preventDefault();
@@ -130,9 +136,10 @@
           var tbl_row =$(this).closest('tr') 
 
           let arr = {  //creating array object so I can send values as Json object and parse it on server to create a Model of a book.
-            book:"",
+            name:"",
             author:"",
-            quantityAll:"",
+            quantityAll:null,
+            quantityFree:null,
             category:"",
             isbn:""
           };
@@ -143,7 +150,7 @@
             console.log(id);
             if(id=="category") //because its drop down select I have to find it first and then get selected category
             {
-              value = $('#bookcategory').find(":selected").text(); //getting selected value
+              value = $('#selectCategory').find(":selected").text(); //getting selected value
             }
             else
             value  =  $(this).html();
@@ -153,23 +160,23 @@
               addBook=false;
               return false;   //returning false to break from .each if any value is empty.. 
             }
-            else value=value.replace(/&nbsp;/g,''); //triming values..if user inserted spaces im just replacing them
+            else value=value.replace(/&nbsp;/g,''); //triming values..if user inserted spaces im just replacing them..this is because im using .html()
             
               switch(id){
-                case 'book':arr.book=value; break;
+                case 'book':arr.name=value; break;
                 case 'author':arr.author=value; break;
-                case 'quantityAll':arr.quantityAll=value; break;
+                case 'quantityAll':arr.quantityAll=value;
+                case 'quantityFree':arr.quantityFree=value;
                 case 'category':arr.category=value; break;
                 case 'isbn':arr.isbn=value; break;
               }
-             
           });
           console.log(arr);
           if(addBook) //sending book to server to add it to Database only if all values are entered
           {
             $.ajax({
               type:"post",
-              url:"http://localhost:5000/booksqq",
+              url:"http://localhost:5000/books",
               contentType:"application/json",
               data:JSON.stringify(arr),
               success:function(data){
@@ -177,11 +184,12 @@
                 // console.log(data.book.name);
                 //append td into tr with jqeury...adding style="display:none" on save and cancel to hide those buttons initially
                 $('#tableID1 tr:last').after(`<tr>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.name}</div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.author}</div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.quantityAll}</div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.category}</div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-white"id="book" contenteditable="false">${data.book.isbn}</div></td>
+                <td ><div class="cont"><div class="row_data text-white"id="bookName" contenteditable="false">${data.book.name}</div></td>
+                <td ><div class="cont"><div class="row_data text-white"id="authorName" contenteditable="false">${data.book.author}</div></td>
+                <td ><div class="cont"><div class="row_data text-white"id="bookQntyAll" contenteditable="false">${data.book.quantityAll}</div></td>
+                <td ><div class="cont"><div class="row_data text-white"id="bookQntyFree" contenteditable="false">${data.book.quantityFree}</div></td>
+                <td ><div class="cont"><div class="row_data text-white"id="bookCategory" contenteditable="false">${data.book.category}</div></td>
+                <td ><div class="cont"><div class="row_data text-white"id="bookIsbn" contenteditable="false">${data.book.isbn}</div></td>
                 <td>
                 <span class="btn_edit" ><button class="btn btn-primary btn-sm"><svg class="edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -201,7 +209,6 @@
                 $("#book").text("");
                 $("#author").text("");
                 $("#quantityAll").text("");
-                $("#category").text("");
                 $("#isbn").text("");
               },
               error:function(e){alert("PROVJERITE SVA IMENA I EMAIL ADRESE IMATE GRESKU");}
