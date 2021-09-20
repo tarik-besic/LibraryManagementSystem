@@ -2,20 +2,25 @@ const Book=require('../models/book')
 const Category=require('../models/category');
 
 const postBookController=async(req,res)=>{
-
-    let name=req.body.book;
-    let author=req.body.author;
-    let quantityAll=req.body.quantityAll;
-    let quantityFree=req.body.quantityFree;
-    let isbn=req.body.isbn;
     let book;
+    
+    let object={
+     name:req.body.name,
+     author:req.body.author,
+     category:req.body.category,
+     quantityAll:req.body.quantityAll,
+     quantityFree:req.body.quantityFree,
+     isbn:req.body.isbn,
+     
+    }
     try{
          book=new Book({
-         name:name,
-         author:author,
-         quantityAll:quantityAll,
-         quantityFree:quantityFree,
-         isbn:isbn
+         name:object.name,
+         author:object.author,
+         category:object.category,
+         quantityAll:object.quantityAll,
+         quantityFree:object.quantityFree,
+         isbn:object.isbn
          });
         }
     catch(err){console.log(err)}
@@ -47,7 +52,7 @@ const getAllBooks=async(req, res) => {
     } catch (error) {
         console.log(error);
     }
-    
+
     res.render('books',{arrayOfBooks,booksCategories});
 }
 

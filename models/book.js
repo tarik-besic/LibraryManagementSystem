@@ -8,7 +8,11 @@ const BookSchema=new Schema({
     },
     author:{
         type:String,
-        required:true,
+        required:true
+    },
+    category:{
+        type:String,
+        required:true
     },
     quantityAll:{
         type:String,
