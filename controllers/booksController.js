@@ -1,4 +1,5 @@
 const Book=require('../models/book')
+const Category=require('../models/category');
 
 const postBookController=async(req,res)=>{
 
@@ -38,8 +39,16 @@ const postBookController=async(req,res)=>{
          }
 }
 const getAllBooks=async(req, res) => {
-    let arrayOfBooks=await Book.find({});
-    res.render('books',{arrayOfBooks});
+    let arrayOfBooks;
+    let booksCategories;
+    try {
+        arrayOfBooks=await Book.find({});
+        booksCategories=await Category.find({});
+    } catch (error) {
+        console.log(error);
+    }
+    
+    res.render('books',{arrayOfBooks,booksCategories});
 }
 
 module.exports={

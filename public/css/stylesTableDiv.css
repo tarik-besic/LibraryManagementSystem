@@ -8,7 +8,7 @@
 }
 #quantityAll{
     background-color: white;
-    min-width: 20px;
+    min-width: 60px;
 }
 #category{
     background-color: white;
@@ -16,7 +16,7 @@
 }
 #isbn{
     background-color: white;
-    min-width: 60px;
+    min-width: 90px;
 }
 .cont, .row_data
 {

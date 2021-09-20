@@ -14,17 +14,16 @@
           </thead>
           <tbody>   
               <tr row_id=-1>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="book" contenteditable="true"></div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="author"contenteditable="true"></div></div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="quantityAll"contenteditable="true"> </div></div></td>
-                <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="category"></div>
+                <td ><div class="cont"><div class="row_data text-dark"id="book" contenteditable="true"></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="author"contenteditable="true"></div></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="quantityAll"contenteditable="true"> </div></div></td>
+                <td ><div class="cont"><div class="row_data text-dark"id="category"></div>
                     <select id="bookcategory" name="cars">
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="fiat">Fiat</option>
-                      <option value="audi">Audi</option>
+                      <% booksCategories.forEach(element=>{ %>
+                      <option ><%= element.name %></option>
+                    <% }) %>
+                      
                     </select>
-                
                 </div></td>
                 <td class="tdEdit"><div class="cont"><div class="row_data text-dark"id="isbn"contenteditable="true"></div></div></td>
                 <td>
