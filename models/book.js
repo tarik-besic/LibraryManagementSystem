@@ -15,12 +15,12 @@ const BookSchema=new Schema({
         required:true
     },
     quantityAll:{
-        type:String,
+        type:Number,
         required:true
     },
     quantityFree:
         {
-         type:String,
+         type:Number,
          required:true
         },
     isbn:
