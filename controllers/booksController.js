@@ -11,8 +11,26 @@ const postBookController=async(req,res)=>{
      quantityAll:req.body.quantityAll,
      quantityFree:req.body.quantityFree,
      isbn:req.body.isbn,
-     
     }
+     //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
+     object.name=object.name.trim();
+     object.author=object.author.trim();
+     object.category=object.category.trim();
+     object.name=object.name.toLowerCase();
+     object.name=object.author.toLowerCase();
+
+     if(typeof object.quantityAll==Number||typeof object.quantityFree==Number)
+        {
+            object.quantityAll=Number(object.quantityAll);
+            object.quantityFree=Number(object.quantityFree)
+        }
+    else {
+            object.quantityAll=0;
+            object.quantityFree=0;
+        }
+  //   
+     object.isbn=object.isbn.trim();
+     
     try{
          book=new Book({
          name:object.name,
@@ -55,8 +73,58 @@ const getAllBooks=async(req, res) => {
 
     res.render('books',{arrayOfBooks,booksCategories});
 }
+const updateBook=async(req,res)=>{
+    let result
+    let object={
+        name:req.body.bookName,
+        author:req.body.authorName,
+        category:req.body.bookCategory,
+        quantityAll:req.body.bookQntyAll,
+        quantityFree:req.body.bookQntyFree,
+        isbn:req.body.bookIsbn,
+        originalName:req.body.originalName
+       }
+    //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
+    object.name=object.name.trim();
+    object.name=object.name.toLowerCase();
+    object.author=object.author.trim();
+    object.author=object.author.toLowerCase();
+    object.category=object.category.trim()
+    object.isbn=object.isbn.trim();
+    object.originalName=object.originalName.trim();
+    
+    object.quantityAll=Number(object.quantityAll);
+    object.quantityFree=Number(object.quantityFree);
+
+
+
+       try {
+           console.log("pokusavam naci"+object.originalName)
+            result=await Book.findOneAndReplace({name:object.originalName},{
+            name:object.name,
+            author:object.author,
+            category:object.category,
+            quantityAll:object.quantityAll,
+            quantityFree:object.quantityFree,
+            isbn:object.isbn,
+            })
+            console.log("ZAVRSIO TRY:"+result)
+    } catch (error) {
+        console.log(error);
+        res.status(400);
+    }
+if(result!=null)
+{
+    res.status(200).json(result);
+}
+else{
+    res.status(400).json({msg:"Problem while editing.."})
+}
+}
+
 
 module.exports={
     postBookController,
-    getAllBooks
+    getAllBooks,
+    updateBook
 }

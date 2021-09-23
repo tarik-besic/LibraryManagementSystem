@@ -92,43 +92,39 @@
         .removeClass('bg-light text-dark') //changing letter and background from white to dark
         .css('padding','')
         .attr('contenteditable', 'false') 
-    
-
-
-        //this gets all values from that tabkle row.
-        // // // var arr = []; 
-        // // // tbl_row.find('.row_data').each(function(index, val) 
-        // // // {    
-        // // //   var col_val  =  $(this).html();
-        // // //   arr.push(col_val);
-        // // // });
-
-
-
-        // var arr = {}; 
-        // tbl_row.find('.row_data').each(function(index, val) 
-        // {   
-        //   var col_name = $(this).attr('col_name');  
-        //   var col_val  =  $(this).html();
-        //   arr[col_name] = col_val;
-        // });
-    
-    
-        //use the "arr"	object for your ajax call
-        // $.extend(arr, {row_id:row_id});
-    
-        // $.ajax({
-        //   type:"post",
-        //   url:"http://localhost:8080/upload",
-        //   contentType:"application/json",
-        //   data:JSON.stringify(arr),
-        //   success:function(data,status){alert(status)}
-        // });
-    
-        //this could be a cool feature
-    //		$('.post_msg').html( '<pre class="bg-success">'+JSON.stringify(arr, null, 2) +'</pre>')
-         
-    
+        
+        let obj = {  //creating array object so I can send values as Json object and parse it on server to create a Model of a book.
+          bookName:"",
+          authorName:"",
+          bookQntyFree:"",
+          bookQntyAll:"",
+          bookCategory:"",
+          bookIsbn:"",
+          originalName:""
+        };
+        
+        tbl_row.find('.row_data').each(function(index, val)  // this gets all values from that tabkle row.
+        { 
+          let col_val;
+          
+          let id=$(this).attr('id');
+          if(id=="bookName")
+          {
+            obj.originalName=$(this).attr('original_entry');
+          }
+          col_val = $(this).html();
+          obj[id]=col_val;
+        });
+        console.log(obj);
+        $.ajax({
+          type:"patch",
+          url:"http://localhost:5000/books",
+          contentType:"application/json",
+          data:JSON.stringify(obj),
+          success:function(result){alert("Updateovali ste knjigu:"+result.name);},
+          error:function(){ alert("NEKI PROBLEMCIC:");
+          }});
+        
       });
       $(document).on('click', '.btn_saveBook', function(event) 
       {
@@ -165,12 +161,13 @@
               switch(id){
                 case 'book':arr.name=value; break;
                 case 'author':arr.author=value; break;
-                case 'quantityAll':arr.quantityAll=value;
-                case 'quantityFree':arr.quantityFree=value;
+                case 'quantityAll':arr.quantityAll=value; break;
+                case 'quantityFree':arr.quantityFree=value; break;
                 case 'category':arr.category=value; break;
                 case 'isbn':arr.isbn=value; break;
               }
           });
+          
           console.log(arr);
           if(addBook) //sending book to server to add it to Database only if all values are entered
           {
@@ -219,22 +216,7 @@
             alert("Niste popunili sva polja prilikom kreiranja knjige");
           }
 
-         
-          
-    //       var arr = {}; 
-    //       tbl_row.find('.row_data').each(function(index, val) 
-    //       {   
-    //         var col_name = $(this).attr('col_name');  
-    //         var col_val  =  $(this).html();
-    //         arr[col_name] = col_val;
-    //       });
-    //   console.log(arr);
-      
-          //use the "arr"	object for your ajax call
-          // $.extend(arr, {row_id:row_id});
-          
 
-    
       });
       
     })
