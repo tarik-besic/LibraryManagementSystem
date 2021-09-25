@@ -18,19 +18,13 @@ const postBookController=async(req,res)=>{
      object.category=object.category.trim();
      object.name=object.name.toLowerCase();
      object.name=object.author.toLowerCase();
-
-     if(typeof object.quantityAll==Number||typeof object.quantityFree==Number)
+     object.isbn=object.isbn.trim();
+     if(Number(object.quantityAll)&& Number(object.quantityFree))
         {
             object.quantityAll=Number(object.quantityAll);
             object.quantityFree=Number(object.quantityFree)
         }
-    else {
-            object.quantityAll=0;
-            object.quantityFree=0;
-        }
-  //   
-     object.isbn=object.isbn.trim();
-     
+
     try{
          book=new Book({
          name:object.name,
@@ -45,21 +39,20 @@ const postBookController=async(req,res)=>{
     
     try{
          await book.save();
+         res.status(200).json({
+         msg:"Book added",
+         book:book
+         });
         }
-         catch(err)
+    catch(err)
          {
-            console.log("Book is not saved");
-            console.log(err);
-             res.status(400).json({
-                msg:"Problem while adding book.."
-             });
+         console.log("Book is not saved");
+         console.log(err);
+         res.status(400).json({
+         msg:"Problem while adding book.." //never used
+        });
             }
-         finally{
-            res.status(200).json({
-                msg:"Book added",
-                book:book
-             });
-         }
+            
 }
 const getAllBooks=async(req, res) => {
     let arrayOfBooks;
@@ -84,19 +77,17 @@ const updateBook=async(req,res)=>{
         isbn:req.body.bookIsbn,
         originalName:req.body.originalName
        }
-    //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
+    
+       //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
     object.name=object.name.trim();
     object.name=object.name.toLowerCase();
     object.author=object.author.trim();
     object.author=object.author.toLowerCase();
     object.category=object.category.trim()
     object.isbn=object.isbn.trim();
-    object.originalName=object.originalName.trim();
-    
+    object.originalName=object.originalName.trim(); 
     object.quantityAll=Number(object.quantityAll);
     object.quantityFree=Number(object.quantityFree);
-
-
 
        try {
            console.log("pokusavam naci"+object.originalName)
@@ -118,7 +109,8 @@ if(result!=null)
     res.status(200).json(result);
 }
 else{
-    res.status(400).json({msg:"Problem while editing.."})
+    console.log(object);
+    res.status(400).json(object); //sending the book that client sent me
 }
 }
 
