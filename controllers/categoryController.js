@@ -5,19 +5,20 @@ const getCategories=async(req,res)=>
     let result;
 try {
     result=await Category.find({});
-
     }
 catch (error) {
     console.log(error);
 }
 
-res.status(200).json(result);
+res.status(200).render('categories')
+// res.status(200).json(result)
 
 }
 
 const postCategory=async(req,res)=>{
 
     let name=req.body.name;
+
     if(name)  //triming only spaces before the name of category and after...eg:"  romance  "=>"romance"
         name=name.trim();
         

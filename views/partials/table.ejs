@@ -14,13 +14,13 @@
             </tr>        
           </thead>
           <tbody>   
-              <tr row_id=-1>
+              <tr row_id=-1 id="editTr">
                 <td ><div class="cont"><div class="row_data text-dark"id="book" contenteditable="true"></div></td>
                 <td ><div class="cont"><div class="row_data text-dark"id="author"contenteditable="true"></div></div></td>
                 <td ><div class="cont"><div class="row_data text-dark"id="quantityAll"contenteditable="true"> </div></div></td>
                 <td ><div class="cont"><div class="row_data text-dark"id="quantityFree"contenteditable="true"> </div></div></td>
                 <td ><div class="cont"><div class="row_data text-dark"id="category"></div>
-                    <select id="selectCategory" name="cars">
+                    <select id="selectCategory">
                       <% booksCategories.forEach(element=>{ %>
                       <option ><%= element.name %></option>
                     <% }) %>
