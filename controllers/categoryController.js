@@ -2,18 +2,17 @@ const Category=require('../models/category');
 
 const getCategories=async(req,res)=>
 {
-    let result;
+    let arrayOfCategories;
 try {
-    result=await Category.find({});
+    arrayOfCategories=await Category.find({});
+    res.status(200).render('category',{arrayOfCategories});
     }
 catch (error) {
     console.log(error);
-}
-
-res.status(200).render('categories')
-// res.status(200).json(result)
-
-}
+    res.status(501).json({
+        msg:"Some problem while fetching categories from database"
+    })
+}}
 
 const postCategory=async(req,res)=>{
 
