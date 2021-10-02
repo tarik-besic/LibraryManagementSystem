@@ -113,7 +113,7 @@
           data:JSON.stringify(obj),
           success:function(result){
             alert("Updateovali ste knjigu:"+result.name);
-            $('#tableID1 tr').each(function(){ //function for searching the book to make its background red
+            $('#tableID1 tr').each(function(){ //function for searching the book to make its background white
               let tbl_row=$(this);
               let book_name=tbl_row.find('#bookName').text();
               book_name=book_name.trim();
