@@ -3,12 +3,11 @@
         $(document).find('.btn_save').hide();
         $(document).find('.btn_cancel').hide();
         $(document).find('.btn_saveBook').show();
+        $(document).find('.btn_delete').show();
     
         $("#quantityAll").keyup(function(){
           
           let text=$("#quantityAll").text();
-          console.log("ide");
-          console.log(text);
           $("#quantityFree").text(text);
         });
           $(document).on('click', '.btn_edit', function(event) 
@@ -21,6 +20,7 @@
   
             //hide edit button
             tbl_row.find('.btn_edit').hide(); 
+            tbl_row.find('.btn_delete').hide(); 
   
             //make the whole row editable
             tbl_row.find('.row_data')
@@ -50,9 +50,9 @@
         //hide save and cacel buttons
         tbl_row.find('.btn_save').hide();
         tbl_row.find('.btn_cancel').hide();
-    
         //show edit button
         tbl_row.find('.btn_edit').show();
+        tbl_row.find('.btn_delete').show();
     
    
         tbl_row.find('.row_data')
@@ -77,6 +77,7 @@
     
         //show edit button
         tbl_row.find('.btn_edit').show();
+        tbl_row.find('.btn_delete').show();
   
         tbl_row.find('.row_data')
         .attr('edit_type', 'click')
@@ -105,7 +106,6 @@
           col_val = $(this).html();
           obj[id]=col_val;
         });
-        console.log(obj);
         $.ajax({
           type:"patch",
           url:"http://localhost:5000/books",
@@ -153,7 +153,6 @@
           tbl_row.find('.row_data').each(function() 
           { let value;
             let id=$(this).attr('id');  //getting id of each row so use it switch statement...
-            console.log(id);
             if(id=="category") //because its drop down select I have to find it first and then get selected category
             {
               value = $('#selectCategory').find(":selected").text(); //getting selected value
@@ -178,7 +177,6 @@
               }
           });
           
-          console.log(obj);
           if(addBook) //sending book to server to add it to Database only if all values are entered
           {
             $.ajax({
@@ -187,7 +185,6 @@
               contentType:"application/json",
               data:JSON.stringify(obj),
               success:function(data){
-                console.log(data);
                 //append td into tr with jqeury...adding style="display:none" on save and cancel to hide those buttons initially
                 let new_row_id=$('#tableID1 tr:last').attr('row_id'); //getting last row_id value
                 new_row_id=Number(new_row_id);
@@ -229,9 +226,36 @@
           else {
             alert("Niste popunili sva polja prilikom kreiranja knjige");
           }
-
-
       });
-      
+
+      $('.btn_delete').click(function(event){
+        event.preventDefault();
+        
+        let tbl_row = $(this).closest('tr');
+        let obj = {  //creating objay object so I can send values as Json object and parse it on server to create a Model of a book.
+          name:"",
+        };
+        
+        obj.name=tbl_row.find('#bookName').text();
+        if(obj.name=="")
+        {
+           alert("PRAZNO JE NE MOZE");
+           return;
+        }
+        
+        $.ajax({
+          type:"delete",
+          url:"http://localhost:5000/books",
+          contentType:"application/json",
+          data:JSON.stringify(obj),
+          success:function(result){
+            alert("Izbrisao si knjigu");
+            location.reload();
+      }, 
+          error:function(data){ 
+            alert(data);
+            }});
+        
+      });
     })
     

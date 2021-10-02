@@ -1,7 +1,7 @@
 const Book=require('../models/book')
 const Category=require('../models/category');
 
-const postBookController=async(req,res)=>{
+const postBook=async(req,res)=>{
     let book;
     
     let object={
@@ -113,10 +113,26 @@ else{
     res.status(400).json(object); //sending the book that client sent me
 }
 }
-
+const deleteBook=async(req,res)=>{
+    let bookName=req.body.name;
+    let result;
+    bookName=bookName.trim();
+    try{
+        result=await Book.findOneAndDelete({name:bookName});
+        if(result)
+        res.status(200).json({"msg":"Book deleted"})
+        else 
+        res.status(400).json({"msg":"Cannot find book"})
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({"msg":"Problem while deleting book"})
+    }
+}
 
 module.exports={
-    postBookController,
+    postBook,
     getAllBooks,
-    updateBook
+    updateBook,
+    deleteBook
 }
