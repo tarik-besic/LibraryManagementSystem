@@ -7,20 +7,17 @@ const user_create_one=async(req,res)=>{
     let books=req.body.books
     let result;
 
-   
      if(name)name=name.toLowerCase();
      if(email)email=email.toLowerCase();
      if(schoolclass)schoolclass=schoolclass.toLowerCase();
    
-   
-    let user_database=new User({
-        name:name,
-        email:email,
-        class:schoolclass,
-        books:books
-    })
-   
     try {
+        let user_database=new User({
+            name:name,
+            email:email,
+            class:schoolclass,
+            books:books
+        });
         result=await user_database.save()
     } catch (error) {
         console.log(error);
@@ -36,13 +33,18 @@ const user_update_book=async(req,res)=>{
     let result;
     let name=req.query.name;
     let email=req.query.email;
-    let schoolclass=req.query.class;
+    let schoolClass=req.query.class;
     let books=req.query.book;
 
-    
-    if(name&&email&&schoolclass&&books)
-    {   try {
-        result=await User.findOneAndUpdate({$and:[{name:name},{email:email},{class:schoolclass}]},{$push:{books:books}})
+    if(name&&email&&schoolClass&&books)
+    {
+        
+        schoolClass=schoolClass.trim();
+        email=email.trim();
+        name=name.trim();
+        books=books.trim();
+        try {
+        result=await User.findOneAndUpdate({$and:[{name:name},{email:email},{class:schoolClass}]},{$push:{books:books}})
     } catch (error) {
         res.status(400).send(error)
     }
@@ -74,7 +76,6 @@ const user_getusers=async(req, res) => {
   
     if(!book)book='/';
    
-  
     if(name=='/'&&book=='/'&&schoolClass=='/')  //if 0 params are sent by user..we just get all users from database
    {   
        try {
@@ -86,8 +87,9 @@ const user_getusers=async(req, res) => {
     }
   }
     else
-  {  try {
-        result=await User.find({$or:[{name:{$regex:name}},{class:{$regex:schoolClass}},{books:{$all:[book]}}]}) //searhcing for user in database that has either contains name,class or book 
+  {  
+      try {
+        result=await User.find({$or:[{name:{$regex:name}},{class:{$regex:schoolClass}},{books:{$elemMatch: {name:book}}}]}) //searhcing for user in database that has either contains name,class or book 
     } catch (err) {
         console.log(err)
     }    
