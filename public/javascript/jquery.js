@@ -96,15 +96,5 @@
 
   
     });
-  
-      //jqeury fucntion that doesnt allow the user to send empty parrams to server..
-      $("form").submit(function(){
-          $("input").each(function(index, obj){
-              if($(obj).val() == "") {
-                  $(obj).remove();
-              }
-          });
-      });
-    
   })
   
