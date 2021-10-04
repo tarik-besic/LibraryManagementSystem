@@ -107,17 +107,20 @@ const user_getusers=async(req, res) => {
 }
 const user_delete=async(req,res)=>{
     let name,email,result;
- 
     name=req.body.name;
     email=req.body.email;
-    if(!name||!email)
+    let _class=req.body.class;
+ 
+    if(!name||!email||!_class)
         res.status(401).json({"msg":"NIJE VALIDAN body"});
 
     name= name.trim();
     email=email.trim();
+    _class=_class.trim();
     
     try {
-        result=await User.findOneAndDelete({$and:[{name:name},{email:email}]});
+        result=await User.findOneAndDelete({$and:[{name:name},{email:email},{class:_class}]});
+        console.log(result+".");
         if(result)
             res.status(200).json({msg:"user deleted"});
         else

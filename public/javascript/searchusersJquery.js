@@ -27,7 +27,9 @@ $(document).ready(function() {
         //this will help in case user decided to click on cancel button
         $(this).attr('original_entry', $(this).text());
       }); 		
-
+        
+          $(tbl_row).css("background-color","#d9d9d9");
+    
     });
   
   $(document).on('click', '.btn_cancel', function(event) 
@@ -36,8 +38,8 @@ $(document).ready(function() {
 
     var tbl_row = $(this).closest('tr');
 
-    var row_id = tbl_row.attr('row_id');
-
+    $(tbl_row).css("background-color","#FFFFFF");
+    
     //hide save and cacel buttons
     tbl_row.find('.btn_save').hide();
     tbl_row.find('.btn_cancel').hide();
@@ -59,9 +61,10 @@ $(document).ready(function() {
   
   $(document).on('click', '.btn_save', function(event) 
   {
+    
     event.preventDefault();
     let tbl_row = $(this).closest('tr');
-
+    $(tbl_row).css("background-color","#FFFFFF");
     //hide save and cacel buttons
     tbl_row.find('.btn_save').hide();
     tbl_row.find('.btn_cancel').hide();
@@ -76,27 +79,55 @@ $(document).ready(function() {
     .css('padding','')
     .attr('contenteditable', 'false') 
   });
-    // //since I have only one row_data i can just get text with find insted doing forEach like in other examples
-    // let updated_name=tbl_row.find('.row_data').text();
-    // let original_entry=tbl_row.find('.row_data').attr('original_entry');
-    // //if name is atlest 3 characters
-    // if(updated_name.length<2)
-    // {
-    //   alert("Ne mozes poslati praznu kategoriju...")
-    //   tbl_row.find('.row_data').text(original_entry);
-    //   return;
-    // }
-    //   updated_name=updated_name.trim();
-    // let object={
-    //   name:original_entry,
-    //   update:updated_name
-    // };
+  $(document).on('click','.btn_delete',(function(event){
+    event.preventDefault();
+    console.log("halo");
+    let tbl_row = $(this).closest('tr');
+    var row_id = tbl_row.attr('row_id');
+
+    let obj={
+        name:"",
+        email:"",
+        class:""
+    }
+
+    tbl_row.find('.row_data').each(function (index,val){
+       switch(index)
+       {
+            case 0:
+                obj.name=$(this).text(); 
+                break;
+            case 1:
+                obj.class=$(this).text()+1; 
+                break;
+            case 2:
+                obj.email=$(this).text(); 
+                break;
+       };
+    });
+    
+    $.ajax({
+        type:"delete",
+        url:"http://localhost:5000/users",
+        contentType:"application/json",
+        data:JSON.stringify(obj),
+        success:function(data){
+            alert("izbrisan je korisnik");
+            //delete him from table in current session.
+            $(tbl_row).remove();
+            // $(`[row_id=${row_id}]`).remove();
+            //it works like this aswell..(i have to leave it i spent 30 minutes trying to find out how to select by attribute)
+        },
+        error:function(){
+            $(tbl_row).css("background-color","#FF0000");
+        }
+    });
+  }));
 
 $("#search_users_btn").on('click',(function(event){
     event.preventDefault();
     $('#users_table').find('tbody').detach();
     $('#users_table').append($('<tbody><tr></tr></tbody>'));
-    console.log("obrisao");
     let obj={
         name:"",
         class:"",
@@ -135,7 +166,8 @@ $("#search_users_btn").on('click',(function(event){
                         return;
                     }
                 data.result.forEach((user,counter) => {
-                     bookOutput=`<select id="selectCategory">`
+                     bookOutput=`<div class="row_data" id="select_books">
+                     <select id="selectCategory">`;
                 
                     if(user.books.length>1)
                         {
@@ -145,13 +177,13 @@ $("#search_users_btn").on('click',(function(event){
                         bookOutput+="</select>";
                         }
                     else
-                        bookOutput=`<div class="row_data"id="">${user.books[0].name}</div></div>`
+                        bookOutput=`<div class="row_data" id="book">${user.books[0].name}`;
 
-                    $("#users_table tr:last").after(`<tr row_id=${counter}>
-                    <td><div class="row_data"id="">${user.name}</div></div></td>
-                    <td><div class="row_data"id="">${user.class}</div></div></td>
-                    <td><div class="row_data"id="">${user.email}</div></div></td>
-                    <td>${bookOutput}
+                    $("#users_table tr:last").after(`<tr row_id=${counter} id=${counter}>
+                    <td><div class="row_data">${user.name}</div></td>
+                    <td><div class="row_data">${user.class}</div></td>
+                    <td><div class="row_data">${user.email}</div></td>
+                    <td>${bookOutput}</div></td>
                     <td>
                         <span class="btn_edit">
                         <button class="btn btn-primary btn-sm" row_id=${counter}> 
