@@ -171,11 +171,11 @@
               data:JSON.stringify(obj),
               success:function(data){
                 //append td into tr with jqeury...adding style="display:none" on save and cancel to hide those buttons initially
-                let new_row_id=$('#tableID1 tr:last').attr('row_id'); //getting last row_id value
-                new_row_id=Number(new_row_id);
-                new_row_id++;
+                let row_id=$('#tableID1 tr:last').attr('row_id'); //getting last row_id value
+                row_id=Number(row_id);
+                row_id++; //after getting last row_id value just ++ to get new one.
                
-                $('#tableID1 tr:last').after(`<tr row_id=${new_row_id}> 
+                $('#tableID1 tr:last').after(`<tr row_id=${row_id}> 
                 <td ><div class="cont"><div class="row_data"id="bookName" contenteditable="false">${data.book.name}</div></td>
                 <td ><div class="cont"><div class="row_data"id="authorName" contenteditable="false">${data.book.author}</div></td>
                 <td ><div class="cont"><div class="row_data"id="bookQntyAll" contenteditable="false">${data.book.quantityAll}</div></td>
@@ -183,17 +183,28 @@
                 <td ><div class="cont"><div class="row_data"id="bookCategory" contenteditable="false">${data.book.category}</div></td>
                 <td ><div class="cont"><div class="row_data"id="bookIsbn" contenteditable="false">${data.book.isbn}</div></td>
                 <td>
-                <span class="btn_edit" ><button class="btn btn-primary btn-sm"><svg class="edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg></button></span>
-                <span class="btn_save"style="display:none"><button class="btn btn-success btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
-                </svg></button></span>
-                <span class="btn_cancel"style="display:none"><button class="btn btn-danger btn-sm"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
-                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                </svg></button></span> 
+                <span class="btn_edit">
+                    <button class="btn btn-primary btn-sm" row_id=${row_id}><svg class="edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg></button>
+                </span>
+                <span class="btn_delete">
+                    <button class="btn btn-danger btn-sm"row_id=${row_id}>
+                    <i class='bx bxs-trash bx-sx'></i>
+                    </button>
+                </span>
+                <span class="btn_save"style="display:none">
+                    <button class="btn btn-success btn-sm" row_id=${row_id}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                    <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z"/>
+                    </svg></button>
+                </span>
+                <span class="btn_cancel"style="display:none">
+                    <button class="btn btn-danger btn-sm" row_id=${row_id}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg></button>
+                </span> 
                 </td>
                 </tr>`);
 
@@ -213,7 +224,7 @@
           }
       });
 
-      $('.btn_delete').click(function(event){
+      $(document).on('click','.btn_delete',function(event){
         event.preventDefault();
         
         let tbl_row = $(this).closest('tr');
@@ -227,13 +238,14 @@
            alert("PRAZNO JE NE MOZE");
            return;
         }
+        console.log(obj);
         
         $.ajax({
           type:"delete",
           url:"http://localhost:5000/books",
           contentType:"application/json",
           data:JSON.stringify(obj),
-          success:function(result){
+          success:function(){
             alert("Izbrisao si knjigu");
             location.reload();
       }, 

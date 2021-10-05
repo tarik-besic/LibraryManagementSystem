@@ -179,7 +179,7 @@ $("#search_users_btn").on('click',(function(event){
                     else
                         bookOutput=`<div class="row_data" id="book">${user.books[0].name}`;
 
-                    $("#users_table tr:last").after(`<tr row_id=${counter} id=${counter}>
+                    $("#users_table tr:last").after(`<tr row_id=${counter}>
                     <td><div class="row_data">${user.name}</div></td>
                     <td><div class="row_data">${user.class}</div></td>
                     <td><div class="row_data">${user.email}</div></td>
@@ -194,7 +194,7 @@ $("#search_users_btn").on('click',(function(event){
                         </button>
                         </span>
                         <span class="btn_delete">
-                        <button class="btn btn-danger btn-sm">
+                        <button class="btn btn-danger btn-sm"row_id=${counter}>
                             <i class='bx bxs-trash bx-sx'></i>
                         </button>
                         </span>
