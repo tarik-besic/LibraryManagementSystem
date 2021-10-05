@@ -21,7 +21,7 @@
             //hide edit button
             tbl_row.find('.btn_edit').hide(); 
             tbl_row.find('.btn_delete').hide(); 
-  
+            $(tbl_row).css("background-color","#D3D3D3");
             //make the whole row editable
             tbl_row.find('.row_data')
             .attr('contenteditable', 'true')
@@ -53,7 +53,7 @@
         //show edit button
         tbl_row.find('.btn_edit').show();
         tbl_row.find('.btn_delete').show();
-    
+        tbl_row.css("background-color","#FFFFFF");
    
         tbl_row.find('.row_data')
         .attr('edit_type', 'click')  //
@@ -70,7 +70,7 @@
       {
         event.preventDefault();
         var tbl_row = $(this).closest('tr');
-     
+        $(tbl_row).css("background-color","#FFFFFF");
         //hide save and cacel buttons
         tbl_row.find('.btn_save').hide();
         tbl_row.find('.btn_cancel').hide();
@@ -113,27 +113,12 @@
           data:JSON.stringify(obj),
           success:function(result){
             alert("Updateovali ste knjigu:"+result.name);
-            $('#tableID1 tr').each(function(){ //function for searching the book to make its background white
-              let tbl_row=$(this);
-              let book_name=tbl_row.find('#bookName').text();
-              book_name=book_name.trim();
-              if(result.name==book_name)
-              {
                 tbl_row.css("background-color","#FFFFFF");
-              }
-            });
-          },
+            },
           error:function(data){ 
             alert(`Niste uspjeli update knjigu: ${data.responseJSON.name}`);
-            $('#tableID1 tr').each(function(){ //function for searching the book to make its background red
-              let tbl_row=$(this);
-              let book_name=tbl_row.find('#bookName').text();
-              book_name=book_name.trim();
-              if(data.responseJSON.name==book_name)
-              {
+            //settings the table_row to red
                 tbl_row.css("background-color","#FF0000");
-              }
-            });
           }});
       });
       $(document).on('click', '.btn_saveBook', function(event) 
