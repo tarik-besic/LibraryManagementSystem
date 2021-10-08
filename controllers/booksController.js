@@ -66,8 +66,20 @@ const getAllBooks=async(req, res) => {
 
     res.render('books',{arrayOfBooks,booksCategories});
 }
+const getOneBook=async(req,res)=>{
+    let name=req.body.name;
+    let result;
+    name=name ? name.trim() : "/";
+    try {
+        result= await Book.find({name:{$regex:name}});
+        res.status(200).json({result});
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 const updateBook=async(req,res)=>{
-    let result
+    let result;
     let object={
         name:req.body.bookName,
         author:req.body.authorName,
@@ -77,7 +89,7 @@ const updateBook=async(req,res)=>{
         isbn:req.body.bookIsbn,
         originalName:req.body.originalName
        }
-    
+       console.log(object);
        //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
     object.name=object.name.trim();
     object.name=object.name.toLowerCase();
@@ -129,10 +141,14 @@ const deleteBook=async(req,res)=>{
         res.status(400).json({"msg":"Problem while deleting book"})
     }
 }
-
+const getIssueBooks=async(req,res)=>{
+    res.render('issuenewbook');
+};
 module.exports={
     postBook,
     getAllBooks,
     updateBook,
-    deleteBook
+    deleteBook,
+    getIssueBooks,
+    getOneBook
 }

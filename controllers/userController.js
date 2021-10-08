@@ -42,23 +42,24 @@ const user_update_book=async(req,res)=>{
         name=name.trim();
         try {
         result=await User.findOneAndUpdate({$and:[{name:name},{email:email},{class:schoolClass}]},{$push:{books:books}})
-        console.log(result);
-        res.status(200).json(result);
+        console.log("r:"+result);
+        if(result)
+            res.status(200).json({result});
+        else
+            res.status(400).json({msg:"Cannot find user.."});
         }
         catch (error) {
         res.status(400).json(error);
     }
-    
     }
 }
 
 const user_getusers=async(req, res) => {
-    console.log("DOSAO2 SI")
     
     //@getting params from frontend
    let name=req.body.name;
-   let book_data=req.body.books; //its array
-   let schoolClass=req.body.class;
+   let book_data=req.body.books||""; //its array
+   let schoolClass=req.body.class||"";
    let result;
    let book=book_data.book || "";
    let category=book_data.category || "";

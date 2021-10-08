@@ -21,6 +21,7 @@ $(document).ready(function() {
             success: function(data) {
                 $('#category_nameInput').text("");
                 alert("dodano");
+                location.reload();
             },
             error:function(data){ 
               alert("Problem while updating book")
@@ -56,8 +57,6 @@ $(document).ready(function() {
         //this will help in case user decided to click on cancel button
         $(this).attr('original_entry', $(this).text());
       }); 		
-  
-  
     });
   
 
@@ -147,7 +146,6 @@ $(document).ready(function() {
     let obj={
       name:name
     };
-    console.log(obj);
     $.ajax({
       type:"delete",
       url:"http://localhost:5000/category",
