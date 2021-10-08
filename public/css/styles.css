@@ -183,9 +183,10 @@ a {
 }
 /* mine */
 #tableID1{
-
     margin-top: 50px;
+}
 
-
+#table_category{
+    width: auto;
 }
 

@@ -2,22 +2,22 @@ const Category=require('../models/category');
 
 const getCategories=async(req,res)=>
 {
-    let result;
+    let arrayOfCategories;
 try {
-    result=await Category.find({});
-
+    arrayOfCategories=await Category.find({});
+    res.status(200).render('category',{arrayOfCategories});
     }
 catch (error) {
     console.log(error);
-}
-
-res.status(200).json(result);
-
-}
+    res.status(501).json({
+        msg:"Some problem while fetching categories from database"
+    })
+}}
 
 const postCategory=async(req,res)=>{
 
     let name=req.body.name;
+
     if(name)  //triming only spaces before the name of category and after...eg:"  romance  "=>"romance"
         name=name.trim();
         
@@ -36,7 +36,12 @@ const postCategory=async(req,res)=>{
 
 const updateCategory=async(req,res)=>{
     let name=req.body.name;  
-    let update=req.body.update;  
+    let update=req.body.update; 
+    if(name)
+    {
+        name=name.trim();
+        update=update.trim();
+    }
     let result;
     try {
         result=await Category.findOneAndUpdate({name:name},{name:update},{new:true}); //adding update and new true so I get object after updating it
@@ -49,7 +54,7 @@ const updateCategory=async(req,res)=>{
         res.status(200).json(result)
     }
     else 
-    res.status(401).json({msg:"Cannot find the category"});
+    res.status(400).json({msg:"Cannot find the category"});
 
 }
 

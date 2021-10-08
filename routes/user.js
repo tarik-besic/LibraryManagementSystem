@@ -13,26 +13,20 @@ userRouter.get('/', (req, res) => {
 })
 
 userRouter.post('/',userController.user_create_one);
-
 userRouter.patch('/', userController.user_update_book);
-
-userRouter.get('/getusers/',userController.user_getusers);
+userRouter.post('/getusers/',userController.user_getusers);
+userRouter.delete('/',userController.user_delete);
 
   
 //function that reads names from either uploaded or empty Excel file that are inside public folder..
 function read() 
 {
-
-
    let filepath='./public/uploadedFile.xlsx'
-  
-    
+     
     //chekcing if file excists so server can read it.
     const readThisFile=(fs.existsSync(filepath))? filepath : filepath='./public/emptyFile.xlsx'
-  
 
     const workbook = XLSX.readFile(readThisFile)
-    
     
     let worksheet = workbook.Sheets[workbook.SheetNames[0]];
     let itUsers = []
@@ -47,7 +41,6 @@ function read()
         const cellAsString = cell.toString();
         //if(cellAsString[1]=='1') continue
 
-        
         if(worksheet[cell].v=="ime")continue;
         if(worksheet[cell].v=="Informaticka gimnazija") {classwork=0;continue;}
         if(worksheet[cell].v=="Opca gimnazija") {classwork=1;continue;}

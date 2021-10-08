@@ -17,8 +17,8 @@ const storage = multer.diskStorage({ //telling multer where to store the Excel f
     },
     filename: function (req, file, cb) {
         const parts = file.originalname.split(".");
-        let first=parts.pop()
-        if(first=='xlsx'||first=='xls'||first=='ods')  //file will only be added to public if its correct extension
+        let extension=parts.pop()
+        if(extension=='xlsx'||extension=='xls'||extension=='ods')  //file will only be added to public if its correct extension
         
         cb(null, `uploadedFile.xlsx`) //file name will always be static uploadedFile.xlsx
         else 

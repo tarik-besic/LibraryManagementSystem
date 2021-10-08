@@ -1,7 +1,7 @@
 const Book=require('../models/book')
 const Category=require('../models/category');
 
-const postBookController=async(req,res)=>{
+const postBook=async(req,res)=>{
     let book;
     
     let object={
@@ -11,8 +11,20 @@ const postBookController=async(req,res)=>{
      quantityAll:req.body.quantityAll,
      quantityFree:req.body.quantityFree,
      isbn:req.body.isbn,
-     
     }
+     //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
+     object.name=object.name.trim();
+     object.author=object.author.trim();
+     object.category=object.category.trim();
+     object.name=object.name.toLowerCase();
+     object.name=object.author.toLowerCase();
+     object.isbn=object.isbn.trim();
+     if(Number(object.quantityAll)&& Number(object.quantityFree))
+        {
+            object.quantityAll=Number(object.quantityAll);
+            object.quantityFree=Number(object.quantityFree)
+        }
+
     try{
          book=new Book({
          name:object.name,
@@ -27,21 +39,20 @@ const postBookController=async(req,res)=>{
     
     try{
          await book.save();
+         res.status(200).json({
+         msg:"Book added",
+         book:book
+         });
         }
-         catch(err)
+    catch(err)
          {
-            console.log("Book is not saved");
-            console.log(err);
-             res.status(400).json({
-                msg:"Problem while adding book.."
-             });
+         console.log("Book is not saved");
+         console.log(err);
+         res.status(400).json({
+         msg:"Problem while adding book.." //never used
+        });
             }
-         finally{
-            res.status(200).json({
-                msg:"Book added",
-                book:book
-             });
-         }
+            
 }
 const getAllBooks=async(req, res) => {
     let arrayOfBooks;
@@ -55,8 +66,89 @@ const getAllBooks=async(req, res) => {
 
     res.render('books',{arrayOfBooks,booksCategories});
 }
+const getOneBook=async(req,res)=>{
+    let name=req.body.name;
+    let result;
+    name=name ? name.trim() : "/";
+    try {
+        result= await Book.find({name:{$regex:name}});
+        res.status(200).json({result});
+    } catch (error) {
+        console.log(error);
+    }
 
+}
+const updateBook=async(req,res)=>{
+    let result;
+    let object={
+        name:req.body.bookName,
+        author:req.body.authorName,
+        category:req.body.bookCategory,
+        quantityAll:req.body.bookQntyAll,
+        quantityFree:req.body.bookQntyFree,
+        isbn:req.body.bookIsbn,
+        originalName:req.body.originalName
+       }
+       console.log(object);
+       //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
+    object.name=object.name.trim();
+    object.name=object.name.toLowerCase();
+    object.author=object.author.trim();
+    object.author=object.author.toLowerCase();
+    object.category=object.category.trim()
+    object.isbn=object.isbn.trim();
+    object.originalName=object.originalName.trim(); 
+    object.quantityAll=Number(object.quantityAll);
+    object.quantityFree=Number(object.quantityFree);
+
+       try {
+           console.log("pokusavam naci"+object.originalName)
+            result=await Book.findOneAndReplace({name:object.originalName},{
+            name:object.name,
+            author:object.author,
+            category:object.category,
+            quantityAll:object.quantityAll,
+            quantityFree:object.quantityFree,
+            isbn:object.isbn,
+            })
+            console.log("ZAVRSIO TRY:"+result)
+    } catch (error) {
+        console.log(error);
+        res.status(400);
+    }
+if(result!=null)
+{
+    res.status(200).json(result);
+}
+else{
+    console.log(object);
+    res.status(400).json(object); //sending the book that client sent me
+}
+}
+const deleteBook=async(req,res)=>{
+    let bookName=req.body.name;
+    let result;
+    bookName=bookName.trim();
+    try{
+        result=await Book.findOneAndDelete({name:bookName});
+        if(result)
+        res.status(200).json({"msg":"Book deleted"})
+        else 
+        res.status(400).json({"msg":"Cannot find book"})
+    }
+    catch(err){
+        console.log(err)
+        res.status(400).json({"msg":"Problem while deleting book"})
+    }
+}
+const getIssueBooks=async(req,res)=>{
+    res.render('issuenewbook');
+};
 module.exports={
-    postBookController,
-    getAllBooks
+    postBook,
+    getAllBooks,
+    updateBook,
+    deleteBook,
+    getIssueBooks,
+    getOneBook
 }
