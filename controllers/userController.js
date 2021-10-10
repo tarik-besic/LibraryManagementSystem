@@ -55,7 +55,7 @@ const user_update_book=async(req,res)=>{
 }
 
 const user_getusers=async(req, res) => {
-    
+    console.log(req.body);
     //@getting params from frontend
    let name=req.body.name;
    let book_data=req.body.books||""; //its array
@@ -64,10 +64,8 @@ const user_getusers=async(req, res) => {
    let book=book_data.book || "";
    let category=book_data.category || "";
 
-   if(name)  //checking if name is defined
     name=name.toLowerCase();
     
-   if(book)
     book=book.toLowerCase();
   
    if(schoolClass=="")
@@ -87,6 +85,7 @@ const user_getusers=async(req, res) => {
        console.log("NISI POSLAO NISTA");
        try {
         result=await User.find({})   //getting all users from database
+        console.log(result);
         res.status(200).json({result:result});
     } catch (error) {
         res.status(400).json(error);

@@ -5,8 +5,6 @@ $(document).ready(function() {
         event.preventDefault();
         var tbl_row = $(this).closest('tr');
 
-        var row_id = tbl_row.attr('row_id');
-
         //show save and cancel buttons
         tbl_row.find('.btn_save').show();
         tbl_row.find('.btn_cancel').show();
@@ -15,21 +13,19 @@ $(document).ready(function() {
         tbl_row.find('.btn_edit').hide(); 
         tbl_row.find('.btn_delete').hide();
 
-        //make the whole row editable
-        tbl_row.find('.row_data')
-        .attr('contenteditable', 'true')
-        .attr('edit_type', 'button')
-        .addClass('bg-light')
-        .css('padding','3px')
-  
-      tbl_row.find('.row_data').each(function(index, val) 
-      {  
-        //this will help in case user decided to click on cancel button
-        $(this).attr('original_entry', $(this).text());
-      }); 		
+        tbl_row.find('.row_data').each(function() {
+            
+            if($(this).attr("contentEditable") == "true"){
+                $(this)
+                .attr('contenteditable', 'true')
+                .attr('edit_type', 'button')
+                .addClass('bg-light')
+                .css('padding','3px')
+            }
+            $(this).attr('original_entry', $(this).text());
+        });
         
           $(tbl_row).css("background-color","#d9d9d9");
-    
     });
   
   $(document).on('click', '.btn_cancel', function(event) 
@@ -166,7 +162,7 @@ $("#search_users_btn").on('click',(function(event){
                         return;
                     }
                 data.result.forEach((user,counter) => {
-                     bookOutput=`<div class="row_data" id="select_books">
+                     bookOutput=`<div class="row_data" id="select_books"contenteditable=false>
                      <select id="selectCategory">`;
                 
                     if(user.books.length>1)
@@ -174,15 +170,18 @@ $("#search_users_btn").on('click',(function(event){
                             user.books.forEach(book=>{
                             bookOutput+=`<option >${book.name}</option>`;
                         })
-                        bookOutput+="</select>";
+                        bookOutput+="</select> ";
                         }
                     else
-                        bookOutput=`<div class="row_data" id="book">${user.books[0].name}`;
+                        if(user.books.length==1)
+                            bookOutput=`<div class="row_data" id="book" contenteditable=false>${user.books[0].name}`;
+                        else
+                            bookOutput=`<div class="row_data" id="book"contenteditable=false>`;
 
                     $("#users_table tr:last").after(`<tr row_id=${counter}>
-                    <td><div class="row_data">${user.name}</div></td>
-                    <td><div class="row_data">${user.class}</div></td>
-                    <td><div class="row_data">${user.email}</div></td>
+                    <td><div class="row_data" contenteditable=true>${user.name}</div></td>
+                    <td><div class="row_data" contenteditable=true>${user.class}</div></td>
+                    <td><div class="row_data" contenteditable=true>${user.email}</div></td>
                     <td>${bookOutput}</div></td>
                     <td>
                         <span class="btn_edit">
