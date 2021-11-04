@@ -13,4 +13,9 @@ bookRouter.delete('/',bookController.deleteBook);
 
 bookRouter.get('/issuenewbook',bookController.getIssueBooks);
 
+bookRouter.get('/return',bookController.getReturnBook);
+bookRouter.delete('/return',bookController.deleteReturnBook);
+bookRouter.post('/return',bookController.postReturnBook);
+
+
 module.exports=bookRouter;

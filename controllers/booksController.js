@@ -1,6 +1,7 @@
-const Book=require('../models/book')
+const Book=require('../models/book');
 const Category=require('../models/category');
-
+const issuedBook=require('../models/issued_books');
+const User=require('../models/user');
 const postBook=async(req,res)=>{
     let book;
     
@@ -144,11 +145,52 @@ const deleteBook=async(req,res)=>{
 const getIssueBooks=async(req,res)=>{
     res.render('issuenewbook');
 };
+const getReturnBook=async(req,res)=>{
+    res.render('returnbook');
+};
+const postReturnBook=async(req,res)=>{
+    let result;
+    let name=req.body.name;
+    console.log("usao si da dodas novu returnknjigu");
+
+    try {
+        result=await issuedBook.find({name:{$regex:name}});
+        res.status(200).json({result});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg:error});
+    }
+};
+const deleteReturnBook=async(req,res)=>{
+    let result;
+    console.log("usao si da izbrises knjigu")
+
+    let obj={
+        name:req.body.name.trim(),
+        email:req.body.email.trim(),
+        class:req.body.class.trim(),
+        book:req.body.book.trim()
+    };
+
+    try {
+        result=await issuedBook.findOneAndDelete(({$and:[{name:obj.name},{email:obj.email},{class:obj.class},{book:obj.book}]}));
+   
+        result=await User.updateOne({name:obj.name,email:obj.email,class:obj.class,books:{$elemMatch:{name:obj.book}}},{$pull:{books:{name:obj.book}}}); //searching user and deleting its book aswell from user table
+ 
+        res.status(200).json({result});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg:error});
+    }
+};
 module.exports={
     postBook,
     getAllBooks,
     updateBook,
     deleteBook,
     getIssueBooks,
-    getOneBook
+    getOneBook,
+    getReturnBook,
+    postReturnBook,
+    deleteReturnBook
 }

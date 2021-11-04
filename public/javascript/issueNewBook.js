@@ -209,7 +209,9 @@ $(document).ready(function() {
                   $("#user_data_list").val("");
                   $("#book_data_list").val("");
                   $("#submitButton").prop( "disabled", true );//making button submit disabled
-                  
+                  $('#user_list_options')
+                    .find('option')
+                    .remove()
                   },
                 error:function(data){ 
                     alert(data.responseJSON.msg);                      

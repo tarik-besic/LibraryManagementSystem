@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Issue new book</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/javascript/javascriptNav.js"></script>
+    <script src="/javascript/returnBookJquery.js"></script>
+    <style>
+         .card-header{
+        border-bottom: 2px solid #4723d9;
+    }
+    .row_data, .fixedRow{
+        text-align: center;
+    }
+    </style>
+</head>
+<body id="body-pd"class="body-pd">
+    <%- include('./partials/nav.ejs') %>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Number of issued books: 
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <input class="form-control" list="search_users_options" id="search_users_data_list" placeholder="Type to search...">
+                        <datalist class id="search_users_options">
+                            <!-- its added with Jquery -->
+                        </datalist>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <table class="table table-hover table-bordered" id="users_table">
+        <thead>
+            <tr>
+                <th colspan="5">Searched users</th>
+            </tr>
+            <tr>
+                <td class="fixedRow">Ime i prezime</td>
+                <td class="fixedRow">Razred</td>
+                <td class="fixedRow">Email</td>
+                <td class="fixedRow">Izdane knjige:</td>
+                <td class="fixedRow">Akcija</td>
+            </tr>
+        </thead>
+            <tbody id="myTableBody">
+                <tr>
+                
+                </tr>
+                <!-- Tables are added with Jquery -->
+            </tbody>
+    </table>
+
+</body>
+</html>
