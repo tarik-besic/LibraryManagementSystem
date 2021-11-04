@@ -1,5 +1,5 @@
 const User=require('../models/user')
-
+const issuedBook=require('../models/issued_books');
 const user_create_one=async(req,res)=>{
     let name=req.body.name;
     let email=req.body.email;
@@ -27,35 +27,41 @@ const user_create_one=async(req,res)=>{
 };
 
 const user_update_book=async(req,res)=>{
-    console.log("update si knjigu");
     let result;
-    let name=req.body.name;
-    let email=req.body.email;
-    let schoolClass=req.body.class;
-    let books=req.body.books;
-
-    console.log(name+"."+email+"."+schoolClass+"."+books+".")
-    if(name&&email&&schoolClass&&books)
+    let obj={
+        name:req.body.name,
+        email:req.body.email,
+        schoolClass:req.body.class,
+        books:req.body.books
+    };
+    if(obj.name&&obj.email&&obj.schoolClass&&obj.books)
     {   
-        schoolClass=schoolClass.trim();
-        email=email.trim();
-        name=name.trim();
+        obj.schoolClass=obj.schoolClass.trim();
+        obj.email=obj.email.trim();
+        obj.name=obj.name.trim();
         try {
-        result=await User.findOneAndUpdate({$and:[{name:name},{email:email},{class:schoolClass}]},{$push:{books:books}})
-        console.log("r:"+result);
+        result=await User.findOneAndUpdate({$and:[{name:obj.name},{email:obj.email},{class:obj.schoolClass}]},{$push:{books:obj.books}})
+        //adding result aswell to other issued_database
+        obj.books=obj.books.name;
+        let newObj= new issuedBook({
+            name:obj.name,
+            email:obj.email,
+            class:obj.schoolClass,
+            book:obj.books
+        });
+        await newObj.save();
         if(result)
             res.status(200).json({result});
         else
-            res.status(400).json({msg:"Cannot find user.."});
+            res.status(401).json({msg:"Cannot find user.."});
         }
         catch (error) {
         res.status(400).json(error);
-    }
+        }
     }
 }
 
 const user_getusers=async(req, res) => {
-    
     //@getting params from frontend
    let name=req.body.name;
    let book_data=req.body.books||""; //its array
@@ -64,10 +70,8 @@ const user_getusers=async(req, res) => {
    let book=book_data.book || "";
    let category=book_data.category || "";
 
-   if(name)  //checking if name is defined
     name=name.toLowerCase();
     
-   if(book)
     book=book.toLowerCase();
   
    if(schoolClass=="")
@@ -87,13 +91,14 @@ const user_getusers=async(req, res) => {
        console.log("NISI POSLAO NISTA");
        try {
         result=await User.find({})   //getting all users from database
+        console.log(result);
         res.status(200).json({result:result});
     } catch (error) {
         res.status(400).json(error);
     }
   }
     else
-  {  console.log("POSLAO SI NESTA");
+  {  
       try
        {
         result=await User.find({$or:[{name:{$regex:name}},{class:{$regex:schoolClass}},{books:{$elemMatch:{$or:[{name:book},{category:category}]}}}]}) //searhcing for user in database that has either contains name,class or book 
