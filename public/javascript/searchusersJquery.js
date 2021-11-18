@@ -15,7 +15,7 @@ $(document).ready(function() {
 
         tbl_row.find('.row_data').each(function() {
             
-            if($(this).attr("contentEditable") == "true"){
+            if($(this).attr("editable") == "true"){
                 $(this)
                 .attr('contenteditable', 'true')
                 .attr('edit_type', 'button')
@@ -179,9 +179,9 @@ $("#search_users_btn").on('click',(function(event){
                             bookOutput=`<div class="row_data" id="book"contenteditable=false>`;
 
                     $("#users_table tr:last").after(`<tr row_id=${counter}>
-                    <td><div class="row_data" contenteditable=true>${user.name}</div></td>
-                    <td><div class="row_data" contenteditable=true>${user.class}</div></td>
-                    <td><div class="row_data" contenteditable=true>${user.email}</div></td>
+                    <td><div class="row_data" editable="true">${user.name}</div></td>
+                    <td><div class="row_data" editable="true">${user.class}</div></td>
+                    <td><div class="row_data" editable="true">${user.email}</div></td>
                     <td>${bookOutput}</div></td>
                     <td>
                         <span class="btn_edit">
