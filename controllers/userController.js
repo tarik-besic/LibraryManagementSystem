@@ -88,7 +88,6 @@ const user_getusers=async(req, res) => {
    
     if(name=='/'&&book=='/'&&schoolClass=='/'&&category=='/')  //if 0 params are sent by user..we just get all users from database
    {   
-       console.log("NISI POSLAO NISTA");
        try {
         result=await User.find({})   //getting all users from database
         console.log(result);
@@ -97,8 +96,7 @@ const user_getusers=async(req, res) => {
         res.status(400).json(error);
     }
   }
-    else
-  {  
+    else{  
       try
        {
         result=await User.find({$or:[{name:{$regex:name}},{class:{$regex:schoolClass}},{books:{$elemMatch:{$or:[{name:book},{category:category}]}}}]}) //searhcing for user in database that has either contains name,class or book 
