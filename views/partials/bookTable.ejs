@@ -36,12 +36,12 @@
               </tr>                  
               <% arrayOfBooks.forEach((book,value)=>{ %>
                 <tr row_id=<%=value %>>
-                <td ><div class="row_data"id="bookName"><%= book.name %> </div></td>
-                <td ><div class="row_data"id="authorName"><%= book.author %></div></td>
-                <td ><div class="row_data"id="bookQntyFree"><%= book.quantityAll %> </div></td>
-                <td ><div class="row_data"id="bookQntyAll"><%= book.quantityFree %> </div></td>
+                <td ><div class="row_data"id="bookName" editable="true"><%= book.name %> </div></td>
+                <td ><div class="row_data"id="authorName"editable="true"><%= book.author %></div></td>
+                <td ><div class="row_data"id="bookQntyFree" editable="true"><%= book.quantityAll %> </div></td>
+                <td ><div class="row_data"id="bookQntyAll" editable="true"><%= book.quantityFree %> </div></td>
                 <td ><div class="row_data"id="bookCategory"><%= book.category %> </div></td>
-                <td ><div class="row_data"id="bookIsbn"><%= book.isbn %></div></td>
+                <td ><div class="row_data"id="bookIsbn" editable="true"><%= book.isbn %></div></td>
                 <td>
                 <span class="btn_edit">
                   <button class="btn btn-primary btn-sm" row_id=<%=value %>><svg class="edit" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
