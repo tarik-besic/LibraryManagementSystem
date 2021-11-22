@@ -11,7 +11,7 @@ Ongoing project..
 ## Technologies used:
 -NodeJs/Express for backend
 
--Jquery for api calls - front end
+-Jquery - front end
 
 -MongoDB for Database
 
