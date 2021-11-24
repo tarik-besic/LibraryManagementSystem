@@ -5,13 +5,12 @@ const bookRouter=express.Router();
 let bookController=require('../controllers/booksController');
 
 bookRouter.post('/one',bookController.getOneBook);
+bookRouter.get('/issuenewbook',bookController.getIssueNewBooks);
 
 bookRouter.get('/',bookController.getAllBooks);
 bookRouter.post('/',bookController.postBook);
 bookRouter.patch('/',bookController.updateBook);
 bookRouter.delete('/',bookController.deleteBook);
-
-bookRouter.get('/issuenewbook',bookController.getIssueBooks);
 
 bookRouter.get('/return',bookController.getReturnBook);
 bookRouter.delete('/return',bookController.deleteReturnBook);

@@ -142,7 +142,7 @@ const deleteBook=async(req,res)=>{
         res.status(400).json({"msg":"Problem while deleting book"})
     }
 }
-const getIssueBooks=async(req,res)=>{
+const getIssueNewBooks=async(req,res)=>{
     res.render('issuenewbook');
 };
 const getReturnBook=async(req,res)=>{
@@ -183,12 +183,13 @@ const deleteReturnBook=async(req,res)=>{
         res.status(500).json({msg:error});
     }
 };
+
 module.exports={
     postBook,
     getAllBooks,
     updateBook,
     deleteBook,
-    getIssueBooks,
+    getIssueNewBooks,
     getOneBook,
     getReturnBook,
     postReturnBook,

@@ -8,7 +8,7 @@ const classRouter=require('./routes/class');
 const rmFileRouter=require('./routes/rmFile');
 const bookRouter=require('./routes/books');
 const categoryRouter=require('./routes/category');
-
+const issuedBooksRouter=require('./routes/issuedBooks')
 //load config
 dotenv.config({path:'./config/config.env' })
 
@@ -32,7 +32,7 @@ app.use('/class',classRouter);
 app.use('/removefile',rmFileRouter);
 app.use('/books',bookRouter);
 app.use('/category',categoryRouter);
-
+app.use('/issuedBooks',issuedBooksRouter);
 app.get('/', (req, res) => {  
     res.render('index');
 })
