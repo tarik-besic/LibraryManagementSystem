@@ -163,13 +163,12 @@ const postReturnBook=async(req,res)=>{
 };
 const deleteReturnBook=async(req,res)=>{
     let result;
-    console.log("usao si da izbrises knjigu")
-
     let obj={
-        name:req.body.name.trim(),
-        email:req.body.email.trim(),
-        class:req.body.class.trim(),
-        book:req.body.book.trim()
+        name:req.body.name ? req.body.name.trim() : "",
+        email:req.body.email ? req.body.email.trim(): "",
+        class:req.body.class ? req.body.class.trim():"",
+        book:req.body.book ? req.body.book.trim() : "" ,
+        issuedDate:req.body.issuedDate ? req.body.issuedDate.trim() : ""
     };
 
     try {

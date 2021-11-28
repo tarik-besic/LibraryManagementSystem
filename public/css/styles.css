@@ -20,7 +20,7 @@
 body {
     position: relative;
     margin: var(--header-height) 0 0 0;
-    padding: 0 1rem;
+    padding: 0 .5rem;
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
     transition: .5s
@@ -39,7 +39,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0 .5em;
     background-color: var(--white-color);
     z-index: var(--z-fixed);
     transition: .5s
@@ -71,7 +71,7 @@ a {
     width: var(--nav-width);
     height: 100vh;
     background-color: var(--first-color);
-    padding: .5rem 1rem 0 0;
+    padding: .5rem 2rem 0 0;
     transition: .5s;
     z-index: var(--z-fixed)
 }
@@ -127,7 +127,7 @@ a {
 }
 
 .body-pd {
-    padding-left: calc(var(--nav-width) + 1rem)
+    padding-left: calc(var(--nav-width) + 10px)
 }
 
 .active {
@@ -150,7 +150,7 @@ a {
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;
-        padding-left: calc(var(--nav-width) + 2rem)
+        padding-left: calc(var(--nav-width) + 1rem)
     }
 
     .header {
