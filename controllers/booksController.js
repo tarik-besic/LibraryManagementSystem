@@ -5,21 +5,15 @@ const User=require('../models/user');
 const postBook=async(req,res)=>{
     let book;
     
+    //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
     let object={
-     name:req.body.name,
-     author:req.body.author,
-     category:req.body.category,
-     quantityAll:req.body.quantityAll,
-     quantityFree:req.body.quantityFree,
-     isbn:req.body.isbn,
+     name:req.body.name ? req.body.name.trim().toLowerCase() : "" ,
+     author:req.body.author ? req.body.author.trim().toLowerCase() : "",
+     category:req.body.category ? req.body.category.trim() : "" ,
+     quantityAll:req.body.quantityAll ? req.body.quantityAll.trim() : "",
+     quantityFree:req.body.quantityFree ? req.body.quantityFree.trim() : "" ,
+     isbn:req.body.isbn ? req.body.isbn.trim() : "" ,
     }
-     //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
-     object.name=object.name.trim();
-     object.author=object.author.trim();
-     object.category=object.category.trim();
-     object.name=object.name.toLowerCase();
-     object.name=object.author.toLowerCase();
-     object.isbn=object.isbn.trim();
      if(Number(object.quantityAll)&& Number(object.quantityFree))
         {
             object.quantityAll=Number(object.quantityAll);
@@ -81,24 +75,20 @@ const getOneBook=async(req,res)=>{
 }
 const updateBook=async(req,res)=>{
     let result;
+    //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
     let object={
-        name:req.body.bookName,
-        author:req.body.authorName,
-        category:req.body.bookCategory,
-        quantityAll:req.body.bookQntyAll,
-        quantityFree:req.body.bookQntyFree,
-        isbn:req.body.bookIsbn,
+        name:req.body.bookName ? req.body.bookName.trim().toLowerCase() : "",
+        author:req.body.authorName ? req.body.authorName.trim().toLowerCase() : "",
+        category:req.body.bookCategory ? req.body.bookCategory.trim() : "",
+        quantityAll: !isNaN(req.body.bookQntyAll) ? Number(req.body.bookQntyAll) : "" , //checking if its number and setting it to a number
+        quantityFree: !isNaN(req.body.bookQntyFree) ? Number(req.body.bookQntyFree) : "",
+        isbn:req.body.bookIsbn ? req.body.bookIsbn.trim() : "",
         originalName:req.body.originalName
        }
        console.log(object);
-       //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
-    object.name=object.name.trim();
-    object.name=object.name.toLowerCase();
-    object.author=object.author.trim();
-    object.author=object.author.toLowerCase();
     object.category=object.category.trim()
     object.isbn=object.isbn.trim();
-    object.originalName=object.originalName.trim(); 
+    object.originalName=object.originalName.trim();
     object.quantityAll=Number(object.quantityAll);
     object.quantityFree=Number(object.quantityFree);
 
