@@ -5,7 +5,9 @@ $(document).ready(function() {
     let month = date.getMonth()+1;
     let year = date.getFullYear();
     let search_val="";
-    $("#issue_date").val(`${month}/${day}/${year}`);
+    date=`${month}/${day}/${year}`;
+    $("#issue_date").val(date);
+    
    
     //setup before functions
     var typingTimer;               //timer identifier
@@ -97,7 +99,6 @@ $(document).ready(function() {
         let options=0;
         if(search_val.length<3)
                 {
-                console.log("brisem ovdje2");
                 $('#user_list_options')
                 .find('option')
                 .remove()
@@ -189,7 +190,8 @@ $(document).ready(function() {
                 books:{
                     name:bookName,
                     category
-                }
+                },
+                date
             }
             $.ajax({
                 type:"patch",

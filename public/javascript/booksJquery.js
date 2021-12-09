@@ -13,32 +13,58 @@
           $(document).on('click', '.btn_edit', function(event) 
         {
             event.preventDefault();
-            var tbl_row = $(this).closest('tr');
+            let tbl_row = $(this).closest('tr');
   
             tbl_row.find('.btn_save').show();
             tbl_row.find('.btn_cancel').show();
-  
+            
+            
             //hide edit button
             tbl_row.find('.btn_edit').hide(); 
             tbl_row.find('.btn_delete').hide(); 
             $(tbl_row).css("background-color","#D3D3D3");
+            //getting original value when clicking btn edit
+            tbl_row.find('.row_data').each(function() 
+            {  
+              //this will help in case user decided to click on cancel button
+              $(this).attr('original_entry', $(this).html());
+            }); 		
+
             //make the whole row editable
-            tbl_row.find('.row_data')
-            .attr('contenteditable', 'true')
-            .attr('edit_type', 'button')
-            .addClass('bg-light text-dark')
-            .css('padding','3px')
+            tbl_row.find('.row_data').each(function() {
+              let original_entry=$(this).attr('original_entry').trim();
+
+              if($(this).attr("editable") == "true"){
+                  $(this)
+                  .attr('contenteditable', 'true')
+                  .attr('edit_type', 'button')
+                  .addClass('bg-light')
+                  .css('padding','3px')
+              }
+              else
+                {
+                  let options="";
+                  $("#selectCategory option").each(function(index,val){
+                    if(val.value==original_entry)
+                        options+=`<option selected>${val.value}</option>`
+                    else
+                        options+=`<option>${val.value}</option>`
+                  });
+
+                  $(this).html(`<select id="editSelect">
+                  ${options}
+                </select>`);
+
+                  $(`#editSelect option[value='${original_entry}']`).attr("selected","selected");
+                }
+             
+          });
 
             if(tbl_row.find('.row_data').hasClass('text-white'))
             {
               tbl_row.find('.row_data').removeClass('text-white')
             }
       
-          tbl_row.find('.row_data').each(function(index, val) 
-          {  
-            //this will help in case user decided to click on cancel button
-            $(this).attr('original_entry', $(this).html());
-          }); 		
         });
       
       $(document).on('click', '.btn_cancel', function(event) 
@@ -95,7 +121,7 @@
           originalName:""
         };
         
-        tbl_row.find('.row_data').each(function(index, val)  // this gets all values from that tabkle row.
+        tbl_row.find('.row_data').each(function(index, val)  // this gets all values from that table row.
         { 
           let col_val;
           let id=$(this).attr('id');
@@ -103,9 +129,26 @@
           {
             obj.originalName=$(this).attr('original_entry');
           }
-          col_val = $(this).html();
+            
+          var selectedCategory = $('#editSelect').find(":selected").text()
+          if(id=="bookCategory")
+            col_val = selectedCategory;
+          else
+            col_val = $(this).html();
+          
           obj[id]=col_val;
         });
+
+        
+        //setting it back from select to regular text
+         tbl_row.find('.row_data').each(function(index, val){
+          
+          if(val.id=="bookCategory")
+          {
+            $(this).html(obj.bookCategory);
+          }
+        })
+        
         $.ajax({
           type:"patch",
           url:"http://localhost:5000/books",

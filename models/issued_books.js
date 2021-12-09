@@ -6,6 +6,7 @@ const IssuedBooksSchema=new Schema({
     email:String,
     class:String,
     book:String,
+    date:String,
 });
 
 const issuedBook=mongoose.model('issued_books',IssuedBooksSchema);

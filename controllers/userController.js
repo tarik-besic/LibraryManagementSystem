@@ -6,7 +6,6 @@ const user_create_one=async(req,res)=>{
     let schoolclass=req.body.class;
     let books=req.body.books
     let result;
-
      if(name)name=name.toLowerCase();
      if(email)email=email.toLowerCase();
      if(schoolclass)schoolclass=schoolclass.toLowerCase();
@@ -27,12 +26,14 @@ const user_create_one=async(req,res)=>{
 };
 
 const user_update_book=async(req,res)=>{
+    console.log("TARIK2")
     let result;
     let obj={
         name:req.body.name,
         email:req.body.email,
         schoolClass:req.body.class,
-        books:req.body.books
+        books:req.body.books,
+        date:req.body.date
     };
     if(obj.name&&obj.email&&obj.schoolClass&&obj.books)
     {   
@@ -47,7 +48,8 @@ const user_update_book=async(req,res)=>{
             name:obj.name,
             email:obj.email,
             class:obj.schoolClass,
-            book:obj.books
+            book:obj.books,
+            date:obj.date
         });
         await newObj.save();
         if(result)
