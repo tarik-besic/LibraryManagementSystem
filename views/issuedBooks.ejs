@@ -75,6 +75,10 @@
     
     <%- include('./partials/nav.ejs') %>
 
+    <% let date=new Date() %>
+    <%date.year=date.getFullYear(); %>
+    <%date.month=date.getMonth()+1; %>
+    <%date.day=date.getDate(); %>
     <div class="mainContainer">
             <span class="headerText">IssuedBooks</span>
         <div class="myContainer">
@@ -114,7 +118,7 @@
                     <td ><div class="row_data"id="userClass"><%= user._class %></div></td>
                     <td ><div class="row_data"id="userBook"><%= user.book %> </div></td>
                     <td ><div class="row_data"id="userIssuedDate"><%= user.issuedDate %> </div></td>
-                    <td ><div class="row_data"id="userInput">INPUT</div></td>
+                    <td ><div class="row_data"id="userInput"><input type="date" id="userInputDate" max=<%- date.year+ "-"+ date.month+ "-" + date.day %>></div></td>
                     <td>
                     <span class="btn_edit">
                       <button class="btn btn-warning btn-sm btn_return" row_id=<%=value %>> Vrati Knjigu</button>
