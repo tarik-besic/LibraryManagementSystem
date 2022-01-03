@@ -10,6 +10,7 @@ const bookRouter=require('./routes/books');
 const categoryRouter=require('./routes/category');
 const issuedBooksRouter=require('./routes/issuedBooks')
 const dashboardRouter=require('./routes/dashboard')
+const historyRouter=require('./routes/history')
 //load config
 dotenv.config({path:'./config/config.env' })
 
@@ -35,6 +36,7 @@ app.use('/books',bookRouter);
 app.use('/category',categoryRouter);
 app.use('/issuedBooks',issuedBooksRouter);
 app.use('/',dashboardRouter);
+app.use('/history',historyRouter);
 
 const PORT=process.env.PORT || 5000;
 
