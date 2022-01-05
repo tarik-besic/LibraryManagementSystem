@@ -14,7 +14,8 @@ const historySchema=new Schema({
         type:Array
     },
     totalBooks:{
-        type:String
+        type:String,
+        required:true
     }
 })
 

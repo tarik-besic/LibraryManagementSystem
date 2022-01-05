@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Create class</title>
+    <style>
+        html{
+            width: 100vw;
+            height: 100vh;
+        }
+        body{
+            background-color: #e2e2e2;
+            width: 100%;
+            min-height: 80vh;
+        }
+        .tareCard{
+            min-width: 230px;
+            min-height: 170px;
+        }
+        .headerText{
+            margin-top: 1em;
+            margin-bottom: .5em;
+            width: fit-content;
+            height: fit-content;
+            font-size: 30px;
+        }
+        .mainContainer{
+            padding-top: 1px;            
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 0;
+            background-color: #fff;
+            min-height: 40vh;
+            height: fit-content;
+            border-radius: 10px;
+            border: 1px solid #c4c4c4;
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+        }
+        .year{
+            font-size: 20px;
+            font-weight:500;
+            margin-bottom: 1em;
+        }        
+        .boxContainer{
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 2em;
+        }
+    </style>
+</head>
+<body id="body-pd" class="body-pd">
+    
+    <%- include('./partials/nav.ejs') %>
+
+
+<div id="tareData" data-arrayData=<%- JSON.stringify(data[0].perMonth) %> ></div>
+
+
+<div class="mainContainer">
+
+    <div class="headerText">
+        History Stats
+    </div>
+
+    <div class="year">
+     Year:
+        <%=data[0].year %>
+    </div>
+        <div class="container">
+            <div class="boxContainer">
+                <%data.forEach((schoolYear)=>{%>    
+                        <div class="col-md-3 mt-4">
+                            <div class="card text-center" style="min-height: 220px;">
+                                <div class="card-header text-white tareCard" style="background-color: #4723d9;">
+                                    <div class="row allign-items-center">
+                                        <div class="col">
+                                            <img src="/images/book.png" alt="" srcset="">
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="display-3">
+                                                <%= schoolYear.users %>
+                                            </h3>
+                                            <p>USERS</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <h5>
+                                        <div class="text-primary">Total Number Of Students This School Year</div>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                            <div class="card text-center" style="min-height: 220px;">
+                                <div class="card-header bg-success text-white tareCard"style="max-height: 220px;">
+                                    <div class="row allign-items-center">
+                                        <div class="col">
+                                            <img src="/images/book.png">
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="display-3">
+                                                <%= schoolYear.totalBooks %>
+                                            </h3>
+                                            <h6>ISSUED BOOKS</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <h5>
+                                        <div class="text-primary">
+                                            Total Books Issued In This School Year
+                                        </div>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mt-4">
+                            <div class="card text-center"style="min-height: 220px;">
+                                <div class="card-header bg-warning text-white tareCard">
+                                    <div class="row allign-items-center">
+                                        <div class="col">
+                                            <img src="/images/book.png" alt="" srcset="">
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="display-3">0</h3>
+                                            <h6>UNRETURNED BOOKS</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <h5>
+                                        <div class="text-primary">
+                                            Number Of Unreturned Books In This School Year
+                                        </div>
+                                    </h5>
+                                </div>
+                            </div>      
+                        </div>
+                    <% }) %>
+            </div>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+              </div>
+        
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/javascript/jquery.js"></script>
+<script src="/javascript/javascriptNav.js"></script>
+<script>
+    const labels = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    let arrayDates=$("#tareData").data("arraydata");
+    let tt=[20,53,64,51,75,85,43,13,57,43,63,12];
+    
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'My First Dataset',
+    data: arrayDates,
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.5)',
+      'rgba(255, 159, 64, 0.5)',
+      'rgba(255, 205, 86, 0.5)',
+      'rgba(75, 192, 192, 0.5)',
+      'rgba(54, 162, 235, 0.5)',
+      'rgba(153, 102, 255, 0.5)',
+      'rgb(170, 255, 224, 0.8)',
+      '#B0D8C7',
+      'rgb(249, 129, 133, 0.5)',
+      'rgb(237, 109, 158, 0.5)',
+      'rgb(237, 138, 252, 0.5)',
+      'rgb(249, 157, 114, 0.5)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)',
+      'rgb(201, 203, 207)',
+      'rgb(201, 203, 207)',
+      'rgb(201, 203, 207)',
+      'rgb(201, 203, 207)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1
+  }]
+};
+    const config = {
+    type: 'bar',
+    data: data,
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    },
+};
+  </script>
+  <script>
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  </script>
+
+</html>
