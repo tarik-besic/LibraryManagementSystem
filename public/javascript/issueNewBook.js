@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
     let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth()+1;
+    let day = date.getDate()<10 ? "0"+ date.getDate() : date.getDate() ;
+    let month = date.getMonth()+1 <10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
     let year = date.getFullYear();
     let search_val="";
     date=`${month}/${day}/${year}`;
     $("#issue_date").val(date);
-    
+    date=`${year}-${month}-${day}`;
    
     //setup before functions
     var typingTimer;               //timer identifier
@@ -193,6 +193,7 @@ $(document).ready(function() {
                 },
                 date
             }
+            console.log("izdan datum je:"+date)
             $.ajax({
                 type:"patch",
                 url:"http://localhost:5000/users",
