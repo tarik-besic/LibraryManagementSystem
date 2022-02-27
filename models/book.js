@@ -8,15 +8,19 @@ const BookSchema=new Schema({
     },
     author:{
         type:String,
-        required:true,
+        required:true
+    },
+    category:{
+        type:String,
+        required:true
     },
     quantityAll:{
-        type:String,
+        type:Number,
         required:true
     },
     quantityFree:
         {
-         type:String,
+         type:Number,
          required:true
         },
     isbn:
@@ -25,9 +29,7 @@ const BookSchema=new Schema({
          required:true  
         }
 }
-
 )
-
 const Book=mongoose.model('book',BookSchema) //(pluralising it first)telling which collection to search in mongodb... in the end it will be users
 
 module.exports=Book;

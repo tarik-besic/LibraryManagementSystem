@@ -4,12 +4,14 @@
     <%- include('./partials/head.ejs') %>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/stylesTableDiv.css">
+    <title>Books</title>
 </head>
 <body id="body-pd"class="body-pd">
   
     <%- include('./partials/nav.ejs') %>
 
-    <%- include('./partials/table.ejs',{arrayOfBooks}) %>
+    
+    <%- include('./partials/bookTable.ejs',{arrayOfBooks,booksCategories}) %>
   
 <script src="/javascript/booksJquery.js"></script>
 <script src="/javascript/javascriptNav.js"></script>

@@ -1,6 +1,15 @@
 const mongoose=require('mongoose')
 const Schema=mongoose.Schema;
 
+const userCategorySchema=({
+    category:{
+        type:String
+    },
+    name:{
+        type:String,
+    }
+})
+
 const userSchema=new Schema({
     name:{
         type:String,
@@ -15,9 +24,7 @@ const userSchema=new Schema({
         required:true
     },
     books:[
-        {
-         type:String
-        }
+        userCategorySchema
     ],
 }
 

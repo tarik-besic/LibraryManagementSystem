@@ -1,28 +1,31 @@
-#addIsbn{
-    border-radius: 25px;
+#book{
+    background-color: white;
     min-width: 60px;
 }
-#addBookQntyFree{
-    border-radius: 25px;
+#author{
+    background-color: white;
+    min-width: 60px;
+}
+#quantityAll{
+    background-color: white;
+    min-width: 60px;
+}
+#quantityFree{
+    background-color: white;
+    min-width: 60px;
+}
+#category{
+    background-color: white;
     min-width: 20px;
 }
-#addBookQntyAll{
-    border-radius: 25px;
-    min-width: 20px;
-}
-#addWriter{
-    border-radius: 25px;
-    min-width: 60px;
-}
-#addBook{
-    border-radius: 25px;
-    min-width: 60px;
+#isbn{
+    background-color: white;
+    min-width: 90px;
 }
 .cont, .row_data
 {
 display:block;
 }
-
-.bookqnty{
-    max-width:90px;
+#editTr{
+background-color: rgb(201, 201, 201);
 }

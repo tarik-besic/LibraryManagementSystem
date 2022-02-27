@@ -3,11 +3,15 @@
     font-size: 15px;
     font-weight: 500
 }
+.btn-secondary{
+
+    background-color: #4723d9 !important;
+}
 .btn-secondary:focus,
 .btn-secondary:active {
     color: #fff;
-    background-color: #4723d9 !important;
-    border-color: #4723d9 !important;
+    background-color: #3113ac !important;
+    border-color: #3113ac !important;
     box-shadow: none
 }
 

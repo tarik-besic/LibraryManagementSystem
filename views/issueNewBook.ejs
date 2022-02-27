@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Issue new book</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/javascript/javascriptNav.js"></script>
+</head>
+<style>
+    
+    .card-header{
+        border-bottom: 2px solid #4723d9;
+    }
+   .card{
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+   }
+   .drugired{
+    display: flex;
+   }
+   .dugme
+   {
+       padding-left: 15px;
+   }
+   .issue2
+   {
+       padding-left: 15px;
+   }
+   .form-control:focus {
+  border-color: #4723d9;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #6946f7;
+}
+.edit{
+    min-width: 92px;
+}
+
+</style>
+<body id="body-pd"class="body-pd">
+    <%- include('./partials/nav.ejs') %>
+    <!-- users -->
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-header-title">
+                    Issue Book
+                </span>
+            </div>
+            <div class="card-body">
+                <div class="mb-10 row moj-row">
+                    <div class="mb-1 col-md-6 prvi">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="user_name">Search User</span>
+                                    <input class="form-control" list="user_list_options" id="user_data_list" placeholder="Type to search...">
+                                    <datalist id="user_list_options">
+                                    <!-- its added with Jquery -->
+                                    </datalist>
+                                </div>
+                                    <div class="form-row mt-4">
+                                        <div class="col-md-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text edit justify-content-center" >Name:</span>
+                                                <input type="text" readonly class="form-control" id="displayName" placeholder="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text edit justify-content-center" >Email:</span>
+                                                <input type="text" readonly class="form-control read" id="displayEmail" placeholder="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text edit justify-content-center" >Class:</span>
+                                                <input type="text" readonly class="form-control" id="displayClass" placeholder="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text edit justify-content-center">Books:</span>
+                                                <input type="text" readonly class="form-control" id="displayBooks" placeholder="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-md-6 drugi">
+                        <div class="input-group">
+                            <span class="input-group-text" id="user_name">Search book</span>
+                            <input class="form-control" list="book_list_options" id="book_data_list" placeholder="Type to search...">
+                                <datalist class id="book_list_options">
+                                    <!-- its added with Jquery -->
+                                </datalist>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-row mt-4">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text edit justify-content-center" >Name:</span>
+                                            <input type="text" readonly class="form-control" id="displayBookName" placeholder="...">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text edit justify-content-center" >Author:</span>
+                                            <input type="text" readonly class="form-control read" id="displayAuthor" placeholder="...">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text edit justify-content-center" >Category</span>
+                                            <input type="text" readonly class="form-control" id="displayCategory" placeholder="...">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text edit justify-content-center" >ISBN</span>
+                                            <input type="text" readonly class="form-control" id="displayIsbn" placeholder="...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form action="" id="myForm">
+                <div class="form-row drugired">
+                    <div class="col-md-4 issue1">
+                        <div class="input-group"id="focus">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Issue Date</span>
+                                </div>
+                                    <input type="text" id="issue_date" readonly class="form-control" required data-date="">
+                            </div>
+                        </div>
+                    <div class="col-md-3 dugme ml-3">
+                        <button class="btn btn-success" id="submitButton"disabled>submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/javascript/issueNewBook.js"></script>
+</html>
