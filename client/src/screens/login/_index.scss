@@ -1,0 +1,17 @@
+.login-screen {
+    .title {
+        color: #8a8fdb;
+        font-size: 64px;
+        font-weight: 600;
+        margin: 20px 0;
+
+        &.small {
+            font-weight: 500;
+            font-size: 16px;
+        }
+    }
+    
+    .login-form {
+        max-width: 300px;
+    }
+}

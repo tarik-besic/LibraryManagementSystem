@@ -1,0 +1,40 @@
+.admin-dashboard-screen {
+    flex-flow: row;
+    
+    .navbar-mobile {
+        width: 64px;
+        display: none;
+
+        @media only screen and (max-width: 768px) {
+            display: block;
+
+            & > .content {
+                height: 100%;
+                width: 256px;
+
+                position: absolute;
+                left: -256px;
+            }
+        }
+    }
+
+    .navbar {
+        width: 256px;
+
+        @media only screen and (max-width: 768px) {
+            &:not(.content){
+                display: none;
+            }
+        }
+    }
+
+    
+    & > .content {
+        flex: 1;
+        background: #F8F8F8;
+        padding: 100px 35px;
+        
+    }
+}
+
+@import "./navbar/index";

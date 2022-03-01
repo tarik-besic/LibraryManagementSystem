@@ -1,0 +1,24 @@
+.dropdown-component {
+    position: relative;
+    cursor: pointer;
+
+    .label {
+        display: flex;
+        flex-flow: row;
+
+        .arrow-icon {
+            width: 12px;
+            height: 12px;
+
+            margin-left: auto;
+        }
+    }
+
+    .items {
+        // /display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+    }
+}

@@ -1,0 +1,29 @@
+
+# Created by https://www.toptal.com/developers/gitignore/api/react,sass
+# Edit at https://www.toptal.com/dev-elopers/gitignore?templates=react,sass
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+# End of https://www.toptal.com/developers/gitignore/api/react,sass
+
+build
