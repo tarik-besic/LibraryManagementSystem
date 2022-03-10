@@ -1,12 +1,4 @@
 .screen {
-    display: flex;
-    flex-flow: column;
-
     min-width: 100vw;
     min-height: 100vh;
-    
-    &.center-content {
-        justify-content: center;
-        align-items: center;
-    }
 }
