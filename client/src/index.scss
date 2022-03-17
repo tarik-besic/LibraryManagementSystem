@@ -10,9 +10,40 @@
 // Screens styling
 @import "./screens/index";
 
+:root{
+    --mar:10px;
+    --test:orange;
+}
 
 body {
     margin: 0;
-    background: $color-zircon;
+    padding: 0;
+    background: #f4f6f9;
     font-family: 'Lexend Deca', sans-serif;
+    width: 100%;
+    height: 100vh;
+    
 }
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+// #root :not(.navbar).header, #root :not(.navbar).screen{
+
+//     margin-left: var(--basic-width);
+// }
+
+
+#root{
+    .static{
+        transition: all ease 0.4s;
+        padding-left: $navbar-width;
+    }
+    .opened{
+        transition: all ease 0.4s;
+        padding-left: $navbar-opened-width;
+    }
+}
+    

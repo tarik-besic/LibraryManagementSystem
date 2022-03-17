@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Dashboard from "./screens/dashboard";
 import Login from "./screens/login";
 
 
 const App = () => {
+    const [open, setOpen] = useState(true)
     return (
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Login />} />
-            </Routes>
+            <Navbar open={open} setOpen={setOpen}/>
+        <div className={open ? "static opened" : "static"}>
+            <Header open={open} setOpen={setOpen}/>
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                </Routes>
+        </div>
         </BrowserRouter>
     );
 };
