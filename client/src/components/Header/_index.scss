@@ -1,0 +1,32 @@
+.header{
+    background-color: $color-header-black;
+    width: 100%;
+    height: $header-height;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .hamburger{
+        transition:all ease 0.4s;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+        div{
+            width: 22px;
+            border: 1px solid white;
+            margin: 4px 0;
+        }
+        &::before{
+            content: "";
+            width: 20px;
+            border: 1px solid white;
+            margin: 4px 0;
+        }
+        &::after{
+            content: "";
+            width: 20px;
+            border: 1px solid white;
+            margin: 4px 0;
+        }
+    }
+}
