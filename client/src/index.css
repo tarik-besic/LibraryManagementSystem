@@ -1,26 +1,221 @@
 @import url("http://fonts.cdnfonts.com/css/lexend-deca:wght@300;400;500;700;900&display=swap");
 /* Style Component */
 .screen {
-  min-width: 100vw;
-  min-height: 100vh;
-}
-
-/* Component Style */
-.login-screen {
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 15px;
+}
+
+/* Component Style */
+.navbar {
+  --basic-width:68px;
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+  padding-top: 16px;
+  width: 68px;
+  height: 100%;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: #343a40;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07), 0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07), 0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+}
+
+.navbar .navbar-upper .logo-container {
+  overflow: hidden;
+  padding-left: 24px;
+  padding-top: 8px;
+  padding-bottom: 16px;
+  margin-bottom: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 1px solid #4b545c;
+}
+
+.navbar .navbar-upper .logo-container img {
+  margin-right: 10px;
+}
+
+.navbar .navbar-upper .logo-container span {
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+  color: #c2c7d0;
+  opacity: 0;
+}
+
+.navbar .navbar-upper .links-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.navbar .navbar-upper .links-container .link {
+  font-family: sans-serif;
+  color: #c2c7d0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 24px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: 0.9px;
+  text-overflow: clip;
+  cursor: pointer;
+}
+
+.navbar .navbar-upper .links-container .link:hover {
+  background-color: #494E53;
+}
+
+.navbar .navbar-upper .links-container .link:hover .text {
+  color: #fff;
+}
+
+.navbar .navbar-upper .links-container .link:hover img {
+  color: gray;
+}
+
+.navbar .navbar-upper .links-container .link img {
+  width: 21px;
+}
+
+.navbar .navbar-upper .links-container .link .text {
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  margin-left: 5px;
+  overflow: hidden;
+  max-height: 18px;
+  opacity: 0;
+}
+
+.open {
+  --basic-width:228px;
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+  width: calc(68px + 160px);
+}
+
+.open .navbar-upper .logo-container span {
+  opacity: 1;
+}
+
+.open .navbar-upper .links-container .link .text {
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 15px;
+  opacity: 1;
+}
+
+.header {
+  background-color: #252525;
+  width: 100%;
+  height: 64px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header .hamburger {
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 20px;
+}
+
+.header .hamburger div {
+  width: 22px;
+  border: 1px solid white;
+  margin: 4px 0;
+}
+
+.header .hamburger::before {
+  content: "";
+  width: 20px;
+  border: 1px solid white;
+  margin: 4px 0;
+}
+
+.header .hamburger::after {
+  content: "";
+  width: 20px;
+  border: 1px solid white;
+  margin: 4px 0;
+}
+
+:root {
+  --mar:10px;
+  --test:orange;
 }
 
 body {
   margin: 0;
-  background: #FDFEFF;
+  padding: 0;
+  background: #f4f6f9;
   font-family: 'Lexend Deca', sans-serif;
+  width: 100%;
+  height: 100vh;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+#root .static {
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+  padding-left: 68px;
+}
+
+#root .opened {
+  -webkit-transition: all ease 0.4s;
+  transition: all ease 0.4s;
+  padding-left: calc(68px + 160px);
 }
 /*# sourceMappingURL=index.css.map */

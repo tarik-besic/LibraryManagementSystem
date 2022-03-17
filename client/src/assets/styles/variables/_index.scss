@@ -1,1 +1,6 @@
 @import "./colors.scss";
+
+$navbar-width:68px;
+$header-height:64px;
+$navbar-opened-width:calc(#{$navbar-width} + 160px);
+$otvoren:10px;
