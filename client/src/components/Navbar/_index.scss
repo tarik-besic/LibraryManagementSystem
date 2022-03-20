@@ -11,11 +11,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
-                0 2px 4px rgba(0,0,0,0.07), 
-                0 4px 8px rgba(0,0,0,0.07), 
+    box-shadow: 0 1px 2px rgba(0,0,0,0.07),
+                0 2px 4px rgba(0,0,0,0.07),
+                0 4px 8px rgba(0,0,0,0.07),
                 0 8px 16px rgba(0,0,0,0.07),
-                0 16px 32px rgba(0,0,0,0.07), 
+                0 16px 32px rgba(0,0,0,0.07),
                 0 32px 64px rgba(0,0,0,0.07);
     .navbar-upper{
         .logo-container{
@@ -45,57 +45,102 @@
             overflow: hidden;
             width: 100%;
             .link{
+                height: 50px;
                 font-family:sans-serif;
                 color: $color-navbar-link;
                 padding-top: 8px;
                 padding-bottom: 8px;
                 padding-left: 24px;
-                margin-bottom: 24px;
+                margin-bottom: 12px;
                 font-size: 16px;
                 display: flex;
                 align-items: center;
                 letter-spacing: 0.9px;
                 text-overflow: clip;
                 cursor: pointer;
-
                 &:hover{
-                    background-color: $color-navbar-link-hover;
-                    .text{
-                        color: #fff;
+                        background-color: $color-navbar-link-hover;
+                        span{
+                            color: #fff;
+                        }
+                        // img{
+                        //     // filter: brightness(0) invert(1);
+                        //     // color: gray;
+                        // }
                     }
+                .main-container{
+                    display: flex;
+                    align-items: center;
                     img{
-                        // filter: brightness(0) invert(1);
-                        color: gray;
+                        // width: 21px;
+                        // height: 21px;
+                    }
+                    span{
+                        transition: all .3s ease;
+                        margin-left: 5px;
+                        overflow: hidden;
+                        max-height: 18px;
+                        width: 100px;
+                        opacity: 0;
                     }
                 }
-                img{
-                    width: 21px;
-                    // height: 21px;
-                }
-                .text{
-                    transition: all .3s ease;
-                    margin-left: 5px;
+            }
+            .menu{
+                height: 50px;
+                .menu-link-container{
+                    background-color: $color-navbar-menu;
+                    transition: padding 0.3s ease-in;
+                    height: 0px;
                     overflow: hidden;
-                    max-height: 18px;
                     opacity: 0;
+                    .link{
+                        padding: 2px;
+                        margin-bottom: 12px;
+                    }
+                    :last-child{
+                        margin-bottom:0px;
+                    }
+
+                    
                 }
-                
+            }
+            .drop{
+                flex-direction: column;
+                align-items: flex-start;
+                height: fit-content;
+                padding:0 0;
+                background-color: $color-navbar-link-hover;
+                .main-container{
+                    padding-left: $padding-navbar-left;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                }
+                .menu-link-container{
+                    width: 100%;
+                    height:fit-content;
+                    opacity: 1;
+                    flex-direction: column;
+                    .link{
+                        transition: padding 0.2s ease;
+                        padding: 6px 0px;
+                        padding-left: $padding-navbar-left;
+                        font-size: 14px;
+                        &:hover{
+                            background-color: $color-navbar-drop-link-hover;
+                        }
+                    }
+                }
             }
         }
     }
 
-    
+
 
 }
 .open{
     --basic-width:228px;
     transition:all ease 0.4s;
     width: $navbar-opened-width;
-    // width: var(--opened-width);
-    // .hamburger{
-    //     transition:all ease 0.4s;
-    //     left: calc(#{$navbar-width} + 200px);
-    // }
     .navbar-upper{
         .logo-container{
             span{
@@ -104,11 +149,20 @@
         }
         .links-container{
             .link{
-                .text{
-                    transition: all .3s ease;
-                    width: fit-content;
-                    margin-left: 15px;
-                    opacity: 1;
+                .main-container{
+                    span{
+                        transition: all .3s ease;
+                        margin-left: 15px;
+                        opacity: 1;
+                    }
+                }
+            }
+            .active{
+                background-color: $color-navbar-red;
+                box-shadow: 0 3px 2px -2px $color-header-black;
+                color: white;
+                &:hover{
+                    background-color: $color-navbar-red;
                 }
             }
         }
