@@ -15,7 +15,7 @@
 
 /* Component Style */
 .navbar {
-  --basic-width:68px;
+  --basic-width: 68px;
   -webkit-transition: all ease 0.4s;
   transition: all ease 0.4s;
   padding-top: 16px;
@@ -74,6 +74,7 @@
 }
 
 .navbar .navbar-upper .links-container .link {
+  text-decoration: none;
   height: 50px;
   font-family: sans-serif;
   color: #c2c7d0;
@@ -111,8 +112,8 @@
 }
 
 .navbar .navbar-upper .links-container .link .main-container span {
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   margin-left: 5px;
   overflow: hidden;
   max-height: 18px;
@@ -134,7 +135,7 @@
 }
 
 .navbar .navbar-upper .links-container .menu .menu-link-container .link {
-  padding: 2px;
+  padding-bottom: 35px;
   margin-bottom: 12px;
 }
 
@@ -159,8 +160,22 @@
 
 .navbar .navbar-upper .links-container .drop .main-container {
   padding-left: 24px;
+  height: 50px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.navbar .navbar-upper .links-container .drop .main-container span {
+  margin-right: 5px;
+}
+
+.navbar .navbar-upper .links-container .drop .main-container .arrow {
+  -webkit-transition: -webkit-transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .navbar .navbar-upper .links-container .drop .menu-link-container {
@@ -175,9 +190,16 @@
           flex-direction: column;
 }
 
+.navbar .navbar-upper .links-container .drop .menu-link-container .main-container {
+  -webkit-transition: padding 0.2s ease;
+  transition: padding 0.2s ease;
+  padding-left: 10px;
+}
+
 .navbar .navbar-upper .links-container .drop .menu-link-container .link {
   -webkit-transition: padding 0.2s ease;
   transition: padding 0.2s ease;
+  height: 45px;
   padding: 6px 0px;
   padding-left: 24px;
   font-size: 14px;
@@ -188,7 +210,7 @@
 }
 
 .open {
-  --basic-width:228px;
+  --basic-width: 228px;
   -webkit-transition: all ease 0.4s;
   transition: all ease 0.4s;
   width: calc(68px + 160px);
@@ -199,10 +221,25 @@
 }
 
 .open .navbar-upper .links-container .link .main-container span {
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
   margin-left: 15px;
   opacity: 1;
+  margin-right: 25px;
+}
+
+.open .navbar-upper .links-container .menu .main-container .arrow {
+  -webkit-transition: -webkit-transform .2s ease;
+  transition: -webkit-transform .2s ease;
+  transition: transform .2s ease;
+  transition: transform .2s ease, -webkit-transform .2s ease;
+  display: block;
+}
+
+.open .navbar-upper .links-container .menu .menu-link-container .link .main-container {
+  -webkit-transition: padding 0.2s ease;
+  transition: padding 0.2s ease;
+  padding-left: 24px;
 }
 
 .open .navbar-upper .links-container .active {
@@ -243,6 +280,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding-left: 20px;
+  cursor: pointer;
 }
 
 .header .hamburger div {
@@ -283,6 +321,13 @@ body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   scroll-behavior: smooth;
+}
+
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #root .static {

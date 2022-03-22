@@ -29,7 +29,9 @@ body {
     box-sizing: border-box;
     scroll-behavior: smooth;
   }
-
+img{
+    user-select: none;
+}
 // #root :not(.navbar).header, #root :not(.navbar).screen{
 
 //     margin-left: var(--basic-width);

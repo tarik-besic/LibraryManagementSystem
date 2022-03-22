@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import userIcon from "../../assets/images/icons/user-icon.svg";
 import logoIcon from "../../assets/images/icons/layer-icon.svg";
+import arrowIconDown from "../../assets/images/icons/arrow-down.svg";
+import arrowIconUp from "../../assets/images/icons/arrow-up.svg";
 import dashboardIcon from "../../assets/images/icons/dashboard-icon.svg";
 import { useLocation, useNavigate } from "react-router";
 // import Link from './link';
@@ -77,6 +79,9 @@ const Navbar = ({ open, setOpen }) => {
                     <div className="main-container">
                       <img src={link.icon} />
                       <span>{link.name}</span>
+                      {/* <span className="arrow"> &gt; </span> */}
+                      <img src={arrowIconDown} className="arrow" />
+
                     </div>
                     <div className="menu-link-container">
                       {link.children.map((child, key) => {
