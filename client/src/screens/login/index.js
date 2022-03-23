@@ -9,7 +9,6 @@ import { useNavigate } from "react-router";
                 {/* <Header /> */}
                 {/* <Navbar open={open} setOpen={setOpen}/> */}
                 LOGIN SAJT
-                
             </div>
         );
     }

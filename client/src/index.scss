@@ -32,6 +32,9 @@ body {
 img{
     user-select: none;
 }
+a{
+    text-decoration: none;
+}
 // #root :not(.navbar).header, #root :not(.navbar).screen{
 
 //     margin-left: var(--basic-width);
