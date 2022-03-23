@@ -8,9 +8,10 @@ import Login from "./screens/login";
 
 const App = () => {
     const [open, setOpen] = useState(true)
+    
     return (
         <BrowserRouter>
-            <Navbar open={open} setOpen={setOpen}/>
+            <Navbar open={open} />
         <div className={open ? "static opened" : "static"}>
             <Header open={open} setOpen={setOpen}/>
                 <Routes>
