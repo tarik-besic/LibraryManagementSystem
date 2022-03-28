@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import arrowIcon from "../../../assets/images/icons/arrow-nav.svg";
 const SubMenu = ({ link, url }) => {
   const [drop, setDrop] = useState(false);
+  
+  useEffect(() => {
+    
+  setDrop(false);
+    
+  }, [url])
+  
   return (
     <div className={`${link.children ? drop ? "menu link drop" : "menu link" : "link"} ${link.children ? ("/" + url?.split("/")[1]) === link.to ? "active" : "" : url === link.to && "active"}`}
       onClick={() => {
@@ -10,8 +17,10 @@ const SubMenu = ({ link, url }) => {
       <div className="main-container">
         <img src={link.icon} alt="icon" />
         <span>{link.name}</span>
+
         {link.children?.length > 0 && <img src={arrowIcon} className="arrow" alt="" />}
       </div>
+
       {link.children && (
         <div className="menu-link-container">
           {link.children.map((child, key) => {

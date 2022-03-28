@@ -62,8 +62,8 @@
 }
 
 .navbar .navbar-upper .logo-container span {
-  -webkit-transition: opacity ease 0.3s;
-  transition: opacity ease 0.3s;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
   color: #fff;
   opacity: 0;
 }
@@ -136,8 +136,8 @@
 }
 
 .navbar .navbar-upper .links-container .link .main-container span {
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   margin-left: 5px;
   overflow: hidden;
   max-height: 18px;

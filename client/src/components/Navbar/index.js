@@ -24,6 +24,7 @@ const Navbar = ({ open, setOpen }) => {
   const [url, setUrl] = useState(location.pathname);
   useEffect(() => {
     if (location.pathname !== url) setUrl(location.pathname);
+    console.log("Url se promijenio");
   }, [location]);
 
   const links = [

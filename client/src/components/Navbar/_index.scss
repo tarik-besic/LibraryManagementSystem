@@ -31,7 +31,7 @@
         margin-right: 10px;
       }
       span {
-        transition: opacity ease 0.3s;
+        transition: all ease 0.3s;
         color: #fff;
         opacity: 0;
       }
@@ -84,7 +84,7 @@
           display: flex;
           align-items: center;
           span {
-            transition: opacity 0.3s;
+            transition: all 0.3s;
             margin-left: 5px;
             overflow: hidden;
             max-height: 18px;
