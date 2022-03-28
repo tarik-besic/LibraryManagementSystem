@@ -1,9 +1,9 @@
 import React from 'react'
 
-const viewUsers = () => {
+const ViewUsers = () => {
   return (
-    <div>viewUsers</div>
+    <div className='screen'>ViewUsers</div>
   )
 }
 
-export default viewUsers
+export default ViewUsers

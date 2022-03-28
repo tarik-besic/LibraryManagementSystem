@@ -1,9 +1,9 @@
 import React from 'react'
 
-const editBooks = () => {
+const EditBooks = () => {
   return (
-    <div>editBooks</div>
+    <div>EditBooks</div>
   )
 }
 
-export default editBooks;
+export default EditBooks;

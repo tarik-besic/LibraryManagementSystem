@@ -75,8 +75,8 @@ const Navbar = ({ open, setOpen }) => {
     {
       name: "Issue New Book",
       icon: bookAddIcon,
-      to: "/issuenew",
-      onClick: () => navigate("/issuenew"),
+      to: "/issuenewbook",
+      onClick: () => navigate("/issuenewbook"),
     },
     {
       name: "Issued Books",

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const addCategory = () => {
+const AddCategory = () => {
   return (
-    <div>addCategory</div>
+    <div>AddCategory</div>
   )
 }
 
-export default addCategory
+export default AddCategory

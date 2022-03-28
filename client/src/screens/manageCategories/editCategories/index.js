@@ -1,9 +1,9 @@
 import React from 'react'
 
-const editCategories = () => {
+const EditCategories = () => {
   return (
-    <div>editCategories</div>
+    <div>EditCategories</div>
   )
 }
 
-export default editCategories
+export default EditCategories
