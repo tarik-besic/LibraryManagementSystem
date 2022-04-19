@@ -36,7 +36,7 @@ const Navbar = ({ open, setOpen }) => {
     },
     {
       icon: bookMngIcon,
-      name: "Mng Books",
+      name: "Books",
       to: "/books",
       children: [
         {
@@ -85,7 +85,7 @@ const Navbar = ({ open, setOpen }) => {
       onClick: () => navigate("/issuedbooks"),
     },
     {
-      name: "Mng Users",
+      name: "Users",
       icon: userIcon,
       to: "/users",
       children: [
@@ -96,7 +96,7 @@ const Navbar = ({ open, setOpen }) => {
           onClick: () => navigate("/users/add"),
         },
         {
-          name: "View Users",
+          name: "Mng Users",
           icon: userViewIcon,
           to: "/users/view",
           onClick: () => navigate("/users/view"),
