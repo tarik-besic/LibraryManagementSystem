@@ -1,7 +1,7 @@
 const express = require('express')
 const dotenv=require('dotenv')
 const connectDB=require('./config/database');
-
+const cors = require('cors')
 //routers
 const {userRouter}=require('./routes/user');
 const classRouter=require('./routes/class');
@@ -19,6 +19,8 @@ connectDB();
 
 // Express app
 const app = express();
+
+app.use(cors());
 
 // Middleware fucntions
 app.use(express.json());
