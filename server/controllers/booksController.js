@@ -132,19 +132,15 @@ const updateBook = async (req, res) => {
     }
 }
 const deleteBook = async (req, res) => {
-    let bookName = req.body.name;
+    if(!req.body.id)
+     res.status(400).json({"msg":"Problem while deleting a book"})
     let result;
-    bookName = bookName.trim();
-    try {
-        result = await Book.findOneAndDelete({ name: bookName });
-        if (result)
-            res.status(200).json({ "msg": "Book deleted" })
-        else
-            res.status(400).json({ "msg": "Cannot find book" })
-    }
-    catch (err) {
+    try{
+        result=await Book.findByIdAndDelete({_id:req.body.id})
+        res.status(200).json(result);
+    }catch(err){
         console.log(err)
-        res.status(400).json({ "msg": "Problem while deleting book" })
+        res.status(400).json({"msg":"Problem while deleting a book"})
     }
 }
 const getIssueNewBooks = async (req, res) => {
