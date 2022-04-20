@@ -33,5 +33,8 @@ class Request {
     static post(url,data, queryParams = {}, headers = {}) {
         return this.basic("POST", url, headers, queryParams,data);
     }
+    static delete(url,data, queryParams = {}, headers = {}) {
+        return this.basic("DELETE", url, headers, queryParams,data);
+    }
 }
 export default Request;

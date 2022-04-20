@@ -1,6 +1,6 @@
 import Request from "../../index";
 
-class IssuedBooks extends Request{
+class IssuedBooksApi extends Request{
 
     static getBooks(){
         return Request.get("/books")
@@ -8,8 +8,10 @@ class IssuedBooks extends Request{
     static updateBook(book){
         return Request.post("/books",{book})
     }
-
-
+    static deleteBook(id){
+        return Request.delete("/books",{id})
+    }
+    
 }
 
-export default IssuedBooks;
+export default IssuedBooksApi;

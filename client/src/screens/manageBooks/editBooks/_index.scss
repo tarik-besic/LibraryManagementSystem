@@ -1,8 +1,16 @@
+$editPadding:10px;
 .edit-books-screen{
-    // background-color: aqua;
     .content-wrapper{
+        h2{
+            border-bottom: 1px solid #c4c4c4;
+            width: 100%;
+            padding:$editPadding;
+        }
         background: white;
         border-radius: 5px;
         border: 1px solid rgb(218, 218, 218);
+        .table-container{
+            padding: $editPadding;
+        }
     }
 }

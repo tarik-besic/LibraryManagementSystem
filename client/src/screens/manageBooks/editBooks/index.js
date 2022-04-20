@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../../../components/table/index';
 import IssuedBooksApi from "../../../api/books/issuedBooks/index";
-import editIcon from  "../../../assets/images/icons/edit-icon.png"
-import deleteIcon from  "../../../assets/images/icons/delete-icon.png"
+import editIcon from "../../../assets/images/icons/edit-icon.png"
+import deleteIcon from "../../../assets/images/icons/delete-icon.png"
 import BooksModal from '../../../components/Modal/booksModal';
 
 
@@ -23,15 +23,15 @@ const EditBooks = () => {
     }
     fetchdata();
   }, [])
-  // useEffect(() => {
-  //   console.log("data");
-  //   console.log(data);
-  // }, [data])
+  useEffect(() => {
+    console.log("data");
+    console.log(data);
+  }, [data])
 
   return (
     <div className='screen edit-books-screen'>
-      <h2>Add Books</h2>
       <div className='content-wrapper'>
+        <h2>Edit Books</h2>
         <Table
           data={data}
           schema={
@@ -63,20 +63,22 @@ const EditBooks = () => {
             }
           }
           actions={[{
-            icon:editIcon,
-            onClick:(person)=>{
-                // console.log("idem da editujem",person);
-                setModalData(person);
+            icon: editIcon,
+            onClick: (person) => {
+              // console.log("idem da editujem",person);
+              setModalData(person);
             }
-        },
-        {
-            icon:deleteIcon,
-            onClick:()=>{
-                console.log("Delete akcija")
+          },
+          {
+            icon: deleteIcon,
+            onClick: (person) => {
+              IssuedBooksApi.deleteBook(person._id).then(() => {
+                setData(data.filter((data) => { return data._id !== person._id }))
+              })
             }
-        }
-    ]
-    }
+          }
+          ]
+          }
         />
       </div>
       {modalData && <BooksModal setModalData={setModalData} book={modalData} />}

@@ -56,13 +56,13 @@
                 // align-items: flex-end;
                 margin: 10px 0;
                 .btnModal{
+                    cursor: pointer;
                     padding: 10px 15px;
                     font-size: 20px;
                     background-color: $color-navbar-red;
                     width: fit-content;
                     border-radius: 5px;
                 }
-
             }
         }
     }

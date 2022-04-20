@@ -344,8 +344,8 @@
           align-items: center;
   background-color: white;
   margin-bottom: 10px;
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0 8px 6px -6px #c1c1c1;
+          box-shadow: 0 8px 6px -6px #c1c1c1;
 }
 
 .table-container .table .cell {
@@ -529,6 +529,7 @@
 }
 
 .modal .modalContainer .contentModal .rowBtn .btnModal {
+  cursor: pointer;
   padding: 10px 15px;
   font-size: 20px;
   background-color: #F73859;
@@ -542,6 +543,16 @@
   background: white;
   border-radius: 5px;
   border: 1px solid #dadada;
+}
+
+.edit-books-screen .content-wrapper h2 {
+  border-bottom: 1px solid #c4c4c4;
+  width: 100%;
+  padding: 10px;
+}
+
+.edit-books-screen .content-wrapper .table-container {
+  padding: 10px;
 }
 
 :root {

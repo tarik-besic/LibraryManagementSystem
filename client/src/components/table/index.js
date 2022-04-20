@@ -64,28 +64,27 @@ const Table = (props) => {
                 </div>
 
                 {paginatedRows.length > 0 && paginatedRows.map((person, i) => {
+
                     return (
                         <div key={i} className="row">
                             {props?.data &&
                                 props.data.length > 0 &&
-                                Object.values(person).map((value, i) => {
-                                    if (i === 0) return;
-                                    return (
-                                        <>
-                                            <div key={i} className="cell">{value}</div>
-                                        </>
-                                    )
+                                Object.entries(person).map((person,i) => {
+                                    const [key, value] = person;
+                                    if (key == "_id" || key == "__v") return;
+                                    return <div key={i} className="cell">{value}</div>
                                 })}
-                            {props?.actions ? <div className="cell">{props.actions.map(action => {
-                                // action.onClick(person)
-                                return (
-                                    <span className="action-icon"
-                                        onClick={()=> action.onClick(person)}
-                                    >
-                                        {action.icon ? <img src={action.icon} /> : "akcija"}
-                                    </span>
-                                )
-                            })} </div> : ''}
+                            {props?.actions ? <div className="cell">{props.actions.map((action,i) => {
+                                    // action.onClick(person)
+                                    return (
+                                        <span className="action-icon"
+                                            onClick={() => action.onClick(person)}
+                                            key={i}
+                                        >
+                                            {action.icon ? <img src={action.icon} /> : "akcija"}
+                                        </span>
+                                    )
+                                })} </div> : ''}
                         </div>
                     );
                 })}
@@ -103,8 +102,8 @@ const Table = (props) => {
                         <select className="selekt"
                             onChange={(e) => { setPageSize(e.target.value) }}
                         >
-                            {sizes.map(size => {
-                                return <option value={size}>{size}</option>
+                            {sizes.map((size,i) => {
+                                return <option value={size} key={i}>{size}</option>
                             })}
                         </select>
 

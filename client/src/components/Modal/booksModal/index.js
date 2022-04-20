@@ -1,5 +1,5 @@
 import IssuedBooksApi from '../../../api/books/issuedBooks'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 const BooksModal = ({ book, setModalData }) => {
     const [data, setData] = useState(book)
@@ -83,7 +83,7 @@ const BooksModal = ({ book, setModalData }) => {
                     </div>
                     <div className="rowBtn">
                         <div className="btnModal" onClick={() => {
-                            if (data.name == "" || data.author == "" || data.category == "" || data.quantityAll == "" || data.quantityFree == "") {
+                            if (data.name === "" || data.author === "" || data.category === "" || data.quantityAll === "" || data.quantityFree === "") {
                                 alert("Please don't leave empty fields")
                                 return;
                             }
