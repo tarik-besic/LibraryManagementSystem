@@ -5,7 +5,7 @@ const getCategories=async(req,res)=>
     let arrayOfCategories;
 try {
     arrayOfCategories=await Category.find({});
-    res.status(200).render('category',{arrayOfCategories});
+    res.status(200).json({arrayOfCategories})
     }
 catch (error) {
     console.log(error);

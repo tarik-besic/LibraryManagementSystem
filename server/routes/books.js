@@ -5,7 +5,7 @@ const bookRouter=express.Router();
 let bookController=require('../controllers/booksController');
 
 bookRouter.post('/one',bookController.getOneBook);
-bookRouter.get('/issuenewbook',bookController.getIssueNewBooks);
+// bookRouter.get('/issuenewbook',bookController.getIssueNewBooks);
 
 bookRouter.get('/',bookController.getAllBooks);
 bookRouter.post('/',bookController.postBook);

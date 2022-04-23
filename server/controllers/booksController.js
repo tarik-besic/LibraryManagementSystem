@@ -3,18 +3,22 @@ const Category = require('../models/category');
 const issuedBook = require('../models/issued_books');
 const User = require('../models/user');
 const postBook = async (req, res) => {
-    console.log(req.body)
-    if (!req.body.id) {
-        console.log("NEMA IDA")
-        res.status(400).json({ msg: "Moras poslati id" })
-    }
     try {
+        let book = new Book({
+            name: req.body.name?.trim().toLowerCase(),
+            author: req.body.author?.trim().toLowerCase(),
+            category: req.body.category?.trim().toLowerCase(),
+            quantityAll: req.body.quantityAll,
+            quantityFree: req.body.quantityFree,
+            isbn: req.body.isbn?.trim()
+        });
 
-        // Book.findByIdAndUpdate( {_id:req.body.id,},{name:req.body.name},{author:req.body.author},{quantityAll:req.body.quantityAll},{} )
-    } catch (er) {
-        console.log(er);
+        await book.save();
+        res.status(200).json({ "msg": "book added to database" })
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({ err })
     }
-
 
 
 
@@ -90,57 +94,29 @@ const getOneBook = async (req, res) => {
 
 }
 const updateBook = async (req, res) => {
-    let result;
-    //had a problem where the stored values had additional spaces before or after..I just trim them here and then save them to database
-    let object = {
-        name: req.body.bookName ? req.body.bookName.trim().toLowerCase() : "",
-        author: req.body.authorName ? req.body.authorName.trim().toLowerCase() : "",
-        category: req.body.bookCategory ? req.body.bookCategory.trim() : "",
-        quantityAll: !isNaN(req.body.bookQntyAll) ? Number(req.body.bookQntyAll) : "", //checking if its number and setting it to a number
-        quantityFree: !isNaN(req.body.bookQntyFree) ? Number(req.body.bookQntyFree) : "",
-        isbn: req.body.bookIsbn ? req.body.bookIsbn.trim() : "",
-        originalName: req.body.originalName
-    }
-    console.log(object);
-    object.category = object.category.trim()
-    object.isbn = object.isbn.trim();
-    object.originalName = object.originalName.trim();
-    object.quantityAll = Number(object.quantityAll);
-    object.quantityFree = Number(object.quantityFree);
-
+    const { book } = req.body
+    console.log("Usao");
     try {
-        console.log("pokusavam naci" + object.originalName)
-        result = await Book.findOneAndReplace({ name: object.originalName }, {
-            name: object.name,
-            author: object.author,
-            category: object.category,
-            quantityAll: object.quantityAll,
-            quantityFree: object.quantityFree,
-            isbn: object.isbn,
-        })
-        console.log("ZAVRSIO TRY:" + result)
-    } catch (error) {
-        console.log(error);
-        res.status(400);
-    }
-    if (result != null) {
-        res.status(200).json(result);
-    }
-    else {
-        console.log(object);
-        res.status(400).json(object); //sending the book that client sent me
+        const result = await Book.findByIdAndUpdate({ _id: book._id }, { name: book.name, author: book.author, category: book.category, quantityAll: book.quantityAll, quantityFree: book.quantityFree, isbn: book.isbn });
+        if (result)
+            res.status(200).json({ "msg": "Book updated" })
+        else
+            res.status(404).json({ "msg": "Not Found" })
+
+    } catch (err) {
+        res.status(400).json({ err })
     }
 }
 const deleteBook = async (req, res) => {
-    if(!req.body.id)
-     res.status(400).json({"msg":"Problem while deleting a book"})
+    if (!req.body.id)
+        res.status(400).json({ "msg": "Problem while deleting a book" })
     let result;
-    try{
-        result=await Book.findByIdAndDelete({_id:req.body.id})
+    try {
+        result = await Book.findByIdAndDelete({ _id: req.body.id })
         res.status(200).json(result);
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        res.status(400).json({"msg":"Problem while deleting a book"})
+        res.status(400).json({ "msg": "Problem while deleting a book" })
     }
 }
 const getIssueNewBooks = async (req, res) => {
