@@ -539,19 +539,38 @@
   border-radius: 5px;
 }
 
-.edit-books-screen .content-wrapper {
+.form .btn {
+  padding: 10px;
+  background-color: #83BD75;
+  max-width: 150px;
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.editBooksScreen .contentWrapper {
   background: white;
   border-radius: 5px;
   border: 1px solid #dadada;
 }
 
-.edit-books-screen .content-wrapper h2 {
+.editBooksScreen .contentWrapper h2 {
   border-bottom: 1px solid #c4c4c4;
   width: 100%;
   padding: 10px;
 }
 
-.edit-books-screen .content-wrapper .table-container {
+.editBooksScreen .contentWrapper .table-container {
   padding: 10px;
 }
 
