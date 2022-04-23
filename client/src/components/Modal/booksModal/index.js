@@ -1,4 +1,4 @@
-import IssuedBooksApi from '../../../api/books/issuedBooks'
+import BookApi from '../../../api/books/issuedBooks'
 import React, { useState } from 'react'
 
 const BooksModal = ({ book, setModalData }) => {
@@ -82,19 +82,24 @@ const BooksModal = ({ book, setModalData }) => {
                         }} />
                     </div>
                     <div className="rowBtn">
-                        <div className="btnModal" onClick={() => {
+                        <div className="btnModal" onClick={async () => {
                             if (data.name === "" || data.author === "" || data.category === "" || data.quantityAll === "" || data.quantityFree === "") {
                                 alert("Please don't leave empty fields")
                                 return;
                             }
-                            if(!Number(data.quantityAll) || !Number(data.quantityFree))
-                                {
-                                    alert("Plase write numbers in quantities")
-                                    return;
-                                }
+                            if (!Number(data.quantityAll) || !Number(data.quantityFree)) {
+                                alert("Plase write numbers in quantities")
+                                return;
+                            }
                             try {
-                                IssuedBooksApi.updateBook(data)
-                            } catch (err) { console.log("error",err) }
+                                await BookApi.updateBook(data).then((resp) => {
+                                    alert("Book updated")
+                                    
+                                }).catch((err) => {
+                                    alert("Error...")
+                                    console.log(err)
+                                })
+                            } catch (err) { console.log("error", err) }
                         }}>Change</div>
                     </div>
                 </div>

@@ -36,5 +36,8 @@ class Request {
     static delete(url,data, queryParams = {}, headers = {}) {
         return this.basic("DELETE", url, headers, queryParams,data);
     }
+    static patch(url,data, queryParams = {}, headers = {}) {
+        return this.basic("PATCH", url, headers, queryParams,data);
+    }
 }
 export default Request;
