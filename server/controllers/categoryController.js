@@ -36,10 +36,6 @@ const postCategory=async(req,res)=>{
 }
 
 const updateCategory=async(req,res)=>{
-
-    console.log(req.body)
-    console.log(req.body._id)
-    console.log(req.body.name)
     try{
         const result=await Category.findByIdAndUpdate({_id:req.body._id},{name:req.body.name});
         if(result){
