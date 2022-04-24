@@ -12,10 +12,11 @@ catch (error) {
     res.status(501).json({
         msg:"Some problem while fetching categories from database"
     })
-}}
+}
+}
 
 const postCategory=async(req,res)=>{
-
+    
     let name=req.body.name;
 
     if(name)  //triming only spaces before the name of category and after...eg:"  romance  "=>"romance"
@@ -35,27 +36,26 @@ const postCategory=async(req,res)=>{
 }
 
 const updateCategory=async(req,res)=>{
-    let name=req.body.name;  
-    let update=req.body.update; 
-    if(name)
-    {
-        name=name.trim();
-        update=update.trim();
-    }
-    let result;
-    try {
-        result=await Category.findOneAndUpdate({name:name},{name:update},{new:true}); //adding update and new true so I get object after updating it
-    } catch (error) {
-        console.log(error);
-    }
 
-    if(result)
-    {
-        res.status(200).json(result)
-    }
-    else 
-    res.status(400).json({msg:"Cannot find the category"});
+    console.log(req.body)
+    console.log(req.body._id)
+    console.log(req.body.name)
+    try{
+        const result=await Category.findByIdAndUpdate({_id:req.body._id},{name:req.body.name});
+        if(result){
+            console.log("radim i ovo1")
+            res.status(200).json({msg:"Category updated"})
+        }
+        else{
+            console.log("radim i ovo2")
+            res.status(404).json({msg:"Category not found"})
 
+        }
+    }catch(err){
+        console.log("radim i ovo3")
+        console.log(err);
+        res.status(400).json({err})
+    }
 }
 
 const deleteCategory=async(req,res)=>{
