@@ -57,20 +57,7 @@ const Navbar = ({ open, setOpen }) => {
       icon: categoryIcon,
       name: "Mng Categories",
       to: "/categories",
-      children: [
-        {
-          icon: categoryIcon,
-          name: "Add Category",
-          to: "/categories/add",
-          onClick: () => navigate("/categories/add"),
-        },
-        {
-          icon: categoryIcon,
-          name: "Edit Categories",
-          to: "/categories/edit",
-          onClick: () => navigate("/categories/edit"),
-        },
-      ],
+      onClick: () => navigate("/categories")
     },
     {
       name: "Issue New Book",

@@ -5,7 +5,7 @@ const Table = (props) => {
 
     const [pageSize, setPageSize] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
-    const [range, sedivange] = useState([]);
+    const [range, setRange] = useState([]);
     const [paginatedRows, setPaginatedRows] = useState([]);
     const sizes = [5, 10, 15, 20];
     useEffect(() => {
@@ -13,15 +13,15 @@ const Table = (props) => {
         setCurrentPage(1);
 
         setPaginatedRows([])
-        const numberOfRows = props?.data?.length;
+        const numberOfRows = props.data?.length ?? 0 ;
         const totalPageCount = Math.ceil(numberOfRows / pageSize);
 
-        sedivange(rangeArray(1, totalPageCount));
+        setRange(rangeArray(1, totalPageCount));
 
         // setting first 5 posts
         // let newData=data.slice(0, pageSize); 
         // console.log("tare:", props?.data?.slice(0, pageSize));
-        setPaginatedRows(props?.data?.slice(0, pageSize));
+        setPaginatedRows(props?.data?.slice(0, pageSize)?? []);
 
         return () => {
 
@@ -50,12 +50,13 @@ const Table = (props) => {
         const startIndex = (index - 1) * pageSize;
         setPaginatedRows(props.data.slice(startIndex, Number(startIndex) + Number(pageSize)))
     }
+        console.log("RERENDERAM TABELUU")
     return (
         <div className="table-container">
             <div className="table">
                 <div className="row header">
                     {
-                        props?.schema && Object.values(props?.schema).map((key, i) => {
+                        props.schema && Object.values(props.schema).map((key, i) => {
                             // console.log(key.name)
                             return (<div key={i} className="cell header"> {key.name} </div>)
                         })
@@ -70,6 +71,7 @@ const Table = (props) => {
                             {props?.data &&
                                 props.data.length > 0 &&
                                 Object.entries(person).map((person,i) => {
+                                    // console.log("Person",person);
                                     const [key, value] = person;
                                     if (key == "_id" || key == "__v") return;
                                     return <div key={i} className="cell">{value}</div>
