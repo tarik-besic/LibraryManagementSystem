@@ -3,8 +3,11 @@ import Table from '../../../components/table/index';
 import BookApi from "../../../api/books/issuedBooks/index";
 import editIcon from "../../../assets/images/icons/edit-icon.png"
 import deleteIcon from "../../../assets/images/icons/delete-icon.png"
+import Modal from '../../../components/Modal';
 import BooksModal from '../../../components/Modal/booksModal';
 
+
+// @actions...Array of objects [{"icon":url,onClick:()=>{function}}]
 
 const EditBooks = () => {
 
@@ -21,8 +24,8 @@ const EditBooks = () => {
 
   return (
     <div className='screen edit-books-screen'>
+      <h2>Edit Books</h2>
       <div className='contentWrapper'>
-        <h2>Edit Books</h2>
         <Table
           data={data}
           schema={
@@ -56,23 +59,23 @@ const EditBooks = () => {
           actions={[{
             icon: editIcon,
             onClick: (person) => {
-              // console.log("idem da editujem",person);
               setModalData(person);
             }
           },
           {
             icon: deleteIcon,
-            onClick: (person) => {
-              BookApi.deleteBook(person._id).then(() => {
-                setData(data.filter((data) => { return data._id !== person._id }))
-              })
+            onClick: async(person) => {
+              const data=await BookApi.deleteBook(person._id);
+              setData(data.filter((data) => { return data._id !== person._id }))
             }
           }
           ]
           }
         />
       </div>
-      {modalData && <BooksModal setModalData={setModalData} book={modalData} />}
+      {modalData && <Modal setModalData={setModalData}  >
+        <BooksModal modalData={modalData} />
+      </Modal>}
       {/* <Modal data={data}/> */}
     </div>
   )
