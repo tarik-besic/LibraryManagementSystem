@@ -1,3 +1,31 @@
 @import "./variables/index";
 
 @import "./screen/index";
+
+.btn-submit {
+    background-color: #4723d9;
+    padding: 12px 6px;
+    max-width: 150px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover{
+        background-color: #603bf8;
+        color: aliceblue;
+    }
+}
+
+.input-text {
+    border: 1px solid $color-border;
+    padding: 10px 8px;
+    border-radius: 4px;
+    outline: none;
+    &:focus {
+        border-color: #4723d9;
+        box-shadow:  0 0 6px #6946f7;
+    }
+}

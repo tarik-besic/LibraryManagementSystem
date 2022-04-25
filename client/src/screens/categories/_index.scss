@@ -1,0 +1,36 @@
+.categoriesScreen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .contentWrapper{
+        display: flex;
+        flex-direction: column;
+        .content{
+            display: flex;
+            .addCategory{
+                margin-left: 100px;
+                background-color: rgb(236, 236, 236);
+                padding: 20px 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border-radius: 10px;
+                height: fit-content;
+                border: 1px solid $color-border;
+                .row{
+                    .btn-submit{
+                        margin: 16px 0;
+                        width: 100%;
+                        max-width: 100%;
+                    }
+                    .disabled{
+                        background-color:#6867b1;
+                    }
+                }
+            }
+        }
+    }
+    .tableContainer{
+        width: 600px;
+    }
+}
