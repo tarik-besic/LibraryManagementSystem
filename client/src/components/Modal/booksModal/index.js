@@ -1,8 +1,8 @@
 import BookApi from '../../../api/books/issuedBooks'
 import React, { useState } from 'react'
 
-const BooksModal = ({ modalData, setModalData }) => {
-    const [data, setData] = useState(modalData)
+const BooksModal = (props) => {
+    const [data, setData] = useState(props.modalData)
 
     return (
         <>
@@ -83,14 +83,26 @@ const BooksModal = ({ modalData, setModalData }) => {
                         return;
                     }
                     try {
-                        await BookApi.updateBook(data).then((resp) => {
-                            alert("Book updated")
+                        const result=await BookApi.updateBook(data)
+                        console.log(result)
+                        if(result.status===200){
+                            alert("Book updated");
+                            props.setData((books) => {
+                                return books.map((book) => {
+                                    if (book._id === data._id)
+                                        return data;
+                                    return book
 
-                        }).catch((err) => {
-                            alert("Error...")
-                            console.log(err)
-                        })
-                    } catch (err) { console.log("error", err) }
+                                })
+                            })
+                        }else{
+                            alert("Problem while updating book");
+                            console.log(result)
+                        }
+                    } catch (err) { 
+                        alert("Error...")
+                        console.log("error", err)
+                     }
                 }}>Change</div>
             </div>
         </>

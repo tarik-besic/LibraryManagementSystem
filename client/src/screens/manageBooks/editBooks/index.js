@@ -58,15 +58,26 @@ const EditBooks = () => {
           }
           actions={[{
             icon: editIcon,
-            onClick: (person) => {
-              setModalData(person);
+            onClick: (book) => {
+              setModalData(book);
             }
           },
           {
             icon: deleteIcon,
-            onClick: async(person) => {
-              const data=await BookApi.deleteBook(person._id);
-              setData(data.filter((data) => { return data._id !== person._id }))
+            onClick: async (person) => {
+              try {
+                const data = await BookApi.deleteBook(person._id);
+                console.log(data.status)
+                if (data.status === 200) {
+                  alert("Book deleted");
+                  setData(data.filter((data) => { return data._id !== person._id }))
+                } else if (data.status === 404) {
+                  alert("Book not found")
+                }
+              } catch (err) {
+                alert("Error...")
+                console.log(err)
+              }
             }
           }
           ]
@@ -74,9 +85,8 @@ const EditBooks = () => {
         />
       </div>
       {modalData && <Modal setModalData={setModalData}  >
-        <BooksModal modalData={modalData} />
+        <BooksModal modalData={modalData} setData={setData}/>
       </Modal>}
-      {/* <Modal data={data}/> */}
     </div>
   )
 }
