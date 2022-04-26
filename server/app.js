@@ -8,7 +8,6 @@ const classRouter=require('./routes/class');
 const rmFileRouter=require('./routes/rmFile');
 const bookRouter=require('./routes/books');
 const categoryRouter=require('./routes/category');
-const issuedBooksRouter=require('./routes/issuedBooks')
 const dashboardRouter=require('./routes/dashboard')
 const historyRouter=require('./routes/history')
 //load config
@@ -36,7 +35,6 @@ app.use('/class',classRouter);
 app.use('/removefile',rmFileRouter);
 app.use('/books',bookRouter);
 app.use('/category',categoryRouter);
-app.use('/issuedBooks',issuedBooksRouter);
 app.use('/',dashboardRouter);
 app.use('/history',historyRouter);
 

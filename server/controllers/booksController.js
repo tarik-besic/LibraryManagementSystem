@@ -119,8 +119,13 @@ const deleteBook = async (req, res) => {
         res.status(400).json({ "msg": "Problem while deleting a book" })
     }
 }
-const getIssueNewBooks = async (req, res) => {
-    res.render('issuenewbook');
+const postIssueNewBook = async (req, res) => {
+
+
+
+
+
+
 };
 const getReturnBook = async (req, res) => {
     res.render('returnbook');
@@ -160,14 +165,28 @@ const deleteReturnBook = async (req, res) => {
     }
 };
 
+const getIssuedBooks = async (req, res) => {
+
+    try{
+        const result=await issuedBook.find({});
+        res.status(200).json({result});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({err});
+    }
+
+
+}
+
 module.exports = {
     postBook,
     getAllBooks,
     updateBook,
     deleteBook,
-    getIssueNewBooks,
+    postIssueNewBook,
     getOneBook,
     getReturnBook,
     postReturnBook,
-    deleteReturnBook
+    deleteReturnBook,
+    getIssuedBooks
 }
