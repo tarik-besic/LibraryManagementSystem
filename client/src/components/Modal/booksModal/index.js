@@ -1,4 +1,4 @@
-import BookApi from '../../../api/books/issuedBooks'
+import BookApi from '../../../api/books'
 import React, { useState } from 'react'
 
 const BooksModal = (props) => {
@@ -13,7 +13,7 @@ const BooksModal = (props) => {
                 <input type="text" value={data.name} onChange={(ev) => {
                     setData({
                         ...data,
-                        name: ev.target.value.trim()
+                        name: ev.target.value
                     })
                 }} />
             </div>
@@ -24,7 +24,7 @@ const BooksModal = (props) => {
                 <input type="text" value={data.author} onChange={(ev) => {
                     setData({
                         ...data,
-                        author: ev.target.value.trim()
+                        author: ev.target.value
                     })
                 }} />
             </div>
@@ -35,7 +35,7 @@ const BooksModal = (props) => {
                 <input type="text" value={data.category} onChange={(ev) => {
                     setData({
                         ...data,
-                        category: ev.target.value.trim()
+                        category: ev.target.value
                     })
                 }} />
             </div>
@@ -46,7 +46,7 @@ const BooksModal = (props) => {
                 <input type="text" value={data.quantityAll} onChange={(ev) => {
                     setData({
                         ...data,
-                        quantityAll: ev.target.value.trim()
+                        quantityAll: ev.target.value
                     })
                 }} />
             </div>
@@ -57,7 +57,7 @@ const BooksModal = (props) => {
                 <input type="text" value={data.quantityFree} onChange={(ev) => {
                     setData({
                         ...data,
-                        quantityFree: ev.target.value.trim()
+                        quantityFree: ev.target.value
                     })
                 }} />
             </div>
@@ -68,7 +68,7 @@ const BooksModal = (props) => {
                 <input type="text" value={data.isbn} onChange={(ev) => {
                     setData({
                         ...data,
-                        isbn: ev.target.value.trim()
+                        isbn: ev.target.value
                     })
                 }} />
             </div>

@@ -100,6 +100,7 @@ const Navbar = ({ open, setOpen }) => {
 
   return (
     <div className={`${open ? "navbar open" : "navbar"}`}>
+      <div className="backdrop" onClick={()=>{setOpen(!open)}}></div>
       <div className="navbar-upper">
         <Link to="/">
           <div className="logo-container">

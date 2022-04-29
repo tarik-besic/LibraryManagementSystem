@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../../../components/table/index';
-import BookApi from "../../../api/books/issuedBooks/index";
+import BookApi from "../../../api/books/index";
 import editIcon from "../../../assets/images/icons/edit-icon.png"
 import deleteIcon from "../../../assets/images/icons/delete-icon.png"
 import Modal from '../../../components/Modal';
@@ -30,6 +30,14 @@ const EditBooks = () => {
           data={data}
           schema={
             {
+              _id: {
+                name: "#",
+                onClick: () => { console.log("Sort by id") },
+                style:{
+                  width:"40px"
+                 
+                }
+              },
               bookName: {
                 name: "Book name",
                 onClick: () => { console.log("Sort by book name") }
@@ -38,17 +46,23 @@ const EditBooks = () => {
                 name: "Author name",
                 onClick: () => { console.log("Sort by author name") }
               },
-              quantityFree: {
-                name: "Books available",
-                onClick: () => { console.log("Sort by author name") }
-              },
-              quantityAll: {
-                name: "Books quantity",
-                onClick: () => { console.log("Sort by books quantity") }
-              },
               category: {
                 name: "Category",
                 onClick: () => { console.log("Sort by books quantity") }
+              },
+              quantityFree: {
+                name: "Available",
+                onClick: () => { console.log("Sort by author name") },
+                style:{
+                  width:"80px"
+                }
+              },
+              quantityAll: {
+                name: "Quantity",
+                onClick: () => { console.log("Sort by books quantity") },
+                style:{
+                  width:"80px"
+                }
               },
               isbn: {
                 name: "ISBN",

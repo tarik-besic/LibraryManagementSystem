@@ -1,36 +1,67 @@
-.categoriesScreen{
+.categoriesScreen {
     display: flex;
     justify-content: center;
     align-items: center;
-    .contentWrapper{
+    // .headerRow{
+    //     text-align: center;
+    // }
+    .contentWrapper {
+        width: 80%;
         display: flex;
-        flex-direction: column;
-        .content{
+        justify-content: space-between;
+        .table-container{
+            width: 70%;
+        }
+        .addCategory {
+            background-color: rgb(226, 226, 226);
+            width: fit-content;
+            // margin: auto;
+            padding: 20px 10px;
             display: flex;
-            .addCategory{
-                margin-left: 100px;
-                background-color: rgb(236, 236, 236);
-                padding: 20px 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                border-radius: 10px;
-                height: fit-content;
-                border: 1px solid $color-border;
-                .row{
-                    .btn-submit{
-                        margin: 16px 0;
-                        width: 100%;
-                        max-width: 100%;
-                    }
-                    .disabled{
-                        background-color:#6867b1;
-                    }
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            height: fit-content;
+            border: 1px solid $color-border;
+
+            .row {
+                width: 80%;
+                .input-text{
+                    width: 100%;
+                }
+                .btn-submit {
+                    margin: 16px 0;
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                .disabled {
+                    background-color: #6867b1;
                 }
             }
         }
     }
-    .tableContainer{
-        width: 600px;
+}
+
+@media only screen and(max-width:1400px) {
+    .categoriesScreen {
+        .contentWrapper {
+            flex-direction: column;
+            width: 100%;
+            .table-container{
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .addCategory{
+                width: 40%;
+                min-width: 200px;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+        }
     }
 }

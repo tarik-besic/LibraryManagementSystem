@@ -36,7 +36,6 @@ a{
     text-decoration: none;
 }
 
-
 #root{
     .static{
         transition: all ease 0.4s;
@@ -45,6 +44,29 @@ a{
     .opened{
         transition: all ease 0.4s;
         padding-left: $navbar-opened-width;
+    }
+}
+@media only screen and(max-width:500px) {
+    #root{
+        .opened{
+            padding-left: 0;
+        }
+        .static{
+            padding-left: 0px;
+        }
+        .open{
+            left: 0;
+            // transition: all 0.2s;
+        .backdrop{
+            position: fixed;
+            z-index: -2;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        }
     }
 }
     

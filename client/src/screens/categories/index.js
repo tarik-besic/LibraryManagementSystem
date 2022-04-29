@@ -37,14 +37,20 @@ const Category = () => {
         <h2>Manage Categories</h2>
       </div>
       <div className="contentWrapper">
-        <div className='content'>
-          <div className="tableContainer">
             <Table
               data={categories}
               schema={{
+                _id: {
+                  name: "#",
+                  onClick: () => { console.log("Sort by id") },
+                  style:{
+                    width:"40px"
+                  }},
+
                 categoryName: {
                   name: "Category",
-                  onClick: () => { console.log("Sort by category") }
+                  onClick: () => { console.log("Sort by category") },
+                  
                 }
               }}
               actions={
@@ -76,7 +82,6 @@ const Category = () => {
                 ]
               }
             />
-          </div>
           <div className='addCategory'>
             <h4>Add a category</h4>
             <div className="row">
@@ -118,7 +123,6 @@ const Category = () => {
               </form>
             </div>
           </div>
-        </div>
         {modalData && <Modal setModalData={setModalData} modalHeader="Edit Category" >
           <CategoriesModal modalData={modalData} setCategories={setCategories} />
         </Modal>}

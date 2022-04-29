@@ -13,7 +13,7 @@ const Table = (props) => {
         setCurrentPage(1);
 
         setPaginatedRows([])
-        const numberOfRows = props.data?.length ?? 0 ;
+        const numberOfRows = props.data?.length ?? 0;
         const totalPageCount = Math.ceil(numberOfRows / pageSize);
 
         setRange(rangeArray(1, totalPageCount));
@@ -21,7 +21,7 @@ const Table = (props) => {
         // setting first 5 posts
         // let newData=data.slice(0, pageSize); 
         // console.log("tare:", props?.data?.slice(0, pageSize));
-        setPaginatedRows(props?.data?.slice(0, pageSize)?? []);
+        setPaginatedRows(props?.data?.slice(0, pageSize) ?? []);
 
         return () => {
 
@@ -50,43 +50,65 @@ const Table = (props) => {
         const startIndex = (index - 1) * pageSize;
         setPaginatedRows(props.data.slice(startIndex, Number(startIndex) + Number(pageSize)))
     }
-        console.log("RERENDERAM TABELUU")
+    // console.log("RERENDERAM TABELUU")
     return (
         <div className="table-container">
             <div className="table">
                 <div className="row header">
-                    {
-                        props.schema && Object.values(props.schema).map((key, i) => {
-                            // console.log(key.name)
-                            return (<div key={i} className="cell header"> {key.name} </div>)
-                        })
+                    {props.schema && Object.entries(props.schema).map((obj, i) => {
+
+                        const [key, value] = obj;
+                        // console.log(paginatedRows[i]["name"])
+                        return (<div
+                            key={i}
+                            className="cell header"
+                            style={{
+                                ...value.style
+                            }}
+                        >
+                            {value.name}
+                            {/* {paginatedRows[i]}  */}
+
+                        </div>
+                        )
+                    })
+
                     }
-                    {props?.actions && <div className="cell header">Akcija </div>}
+
+                    {props?.actions && <div className="cell header action">Akcija </div>}
                 </div>
 
-                {paginatedRows.length > 0 && paginatedRows.map((person, i) => {
+                {paginatedRows.length > 0 && paginatedRows.map((person, index) => {
 
                     return (
-                        <div key={i} className="row">
+                        <div key={index} className="row">
                             {props?.data &&
                                 props.data.length > 0 &&
-                                Object.entries(person).map((person,i) => {
-                                    // console.log("Person",person);
-                                    const [key, value] = person;
-                                    if (key == "_id" || key == "__v") return;
-                                    return <div key={i} className="cell">{value}</div>
+                                Object.entries(person).map((item, i) => {
+                                    const [key, value] = item;
+                                    if (key == "__v") return;
+                                    return <div
+                                        key={i}
+                                        className="cell"
+                                        style={{
+                                            ...props.schema[key]?.style,
+                                        }}
+                                    >
+                                        {key === "_id" ? index+1 : value}
+
+                                    </div>
                                 })}
-                            {props?.actions ? <div className="cell">{props.actions.map((action,i) => {
-                                    // action.onClick(person)
-                                    return (
-                                        <span className="action-icon"
-                                            onClick={() => action.onClick(person)}
-                                            key={i}
-                                        >
-                                            {action.icon ? <img src={action.icon} /> : "akcija"}
-                                        </span>
-                                    )
-                                })} </div> : ''}
+                            {props?.actions ? <div className="cell action">{props.actions.map((action, i) => {
+                                // action.onClick(person)
+                                return (
+                                    <span className="action-icon"
+                                        onClick={() => action.onClick(person)}
+                                        key={i}
+                                    >
+                                        {action.icon ? <img src={action.icon} /> : "akcija"}
+                                    </span>
+                                )
+                            })} </div> : ''}
                         </div>
                     );
                 })}
@@ -104,7 +126,7 @@ const Table = (props) => {
                         <select className="selekt"
                             onChange={(e) => { setPageSize(e.target.value) }}
                         >
-                            {sizes.map((size,i) => {
+                            {sizes.map((size, i) => {
                                 return <option value={size} key={i}>{size}</option>
                             })}
                         </select>

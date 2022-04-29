@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar open={open} />
+      <Navbar open={open} setOpen={setOpen} />
       <div className={open ? "static opened" : "static"}>
         <Header open={open} setOpen={setOpen} />
         <Routes>

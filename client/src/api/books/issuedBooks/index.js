@@ -1,20 +1,14 @@
-import Request from "../../index";
+import Request from "../..";
 
-class BookApi extends Request{
+class IssuedBookApi {
 
     static getBooks(){
-        return Request.get("/books")
+        return Request.get("/books/issued")
     }
-    static updateBook(book){
-        return Request.patch("/books",{book})
-    }
-    static deleteBook(id){
-        return Request.delete("/books",{id})
-    }
-    static addBook(book){
-        return Request.post("/books",book)
+    static issueNew(){
+        return Request.post("/books/issued",)
     }
     
 }
 
-export default BookApi;
+export default IssuedBookApi;

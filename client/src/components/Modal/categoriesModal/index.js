@@ -15,7 +15,7 @@ const CategoriesModal = ({ modalData, setCategories }) => {
                 <input type="text" value={data.name} onChange={(ev) => {
                     setData({
                         ...data,
-                        name: ev.target.value.trim()
+                        name: ev.target.value
                     })
                 }} />
             </div>
